@@ -30,10 +30,10 @@ export default function RootLayout({
         <link rel="stylesheet" href="https://unicons.iconscout.com/release-pro/v4.0.0/css/line.css" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased p-2`}
       >
-        {children}
         <Navbar/>
+        {children}
       </body>
     </html>
   );
