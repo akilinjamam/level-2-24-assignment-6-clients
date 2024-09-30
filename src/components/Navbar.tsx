@@ -17,9 +17,11 @@ const Navbar = () => {
            <div className="w-[50%] h-full flex items-center justify-around">
                 {
                     homeRoutes?.map((item: THomeRoutes, index: number) => {
-                       
+                       const active = (linkValue: string) => {
+                        return (pathName === linkValue) ? 'border-b-2 border-blue-500' : '' 
+                       }
                         return (
-                            <div style={{borderBottom: `${(pathName === item?.links) ? '2px solid blue' : ''}`}}  key={index + 1} className=" w-[50%] h-full flex items-center justify-around">
+                            <div  key={index + 1} className={`w-[50%] h-full flex items-center justify-around ${active(item?.links)}`}>
                                 <Link  href={item.links}>
                                     <i title={item?.name} className={`${item?.icons} text-2xl w-[24%] text-center cursor-pointer`}></i>
                                 </Link>
