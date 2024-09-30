@@ -23,6 +23,21 @@ export const homeRoutes: THomeRoutes[] = [
   {
     links: "/contactUs",
     icons: "uil uil-envelope",
-    name: "About Us",
+    name: "Contact Us",
+  },
+  {
+    links: "/profile",
+    icons: "uil uil-user",
+    name: "Profile",
+  },
+  {
+    links: "/login",
+    icons: "uil uil-sign-in-alt",
+    name: "Login",
+  },
+  {
+    links: "/registration",
+    icons: "uil uil-registered",
+    name: "Registration",
   },
 ];
