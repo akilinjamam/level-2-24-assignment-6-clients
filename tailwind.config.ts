@@ -14,11 +14,6 @@ const config: Config = {
       },
     },
   },
-  safelist: [
-    "border-b-2",
-    "border-blue-500",
-    // Add any other dynamic classes you need here
-  ],
   plugins: [],
 };
 export default config;
