@@ -1,9 +1,9 @@
-import React, { ReactNode } from 'react';
 
-const Page = ({children}: {children: ReactNode}) => {
+
+const Page = () => {
     return (
         <div >
-           {children}
+          this is user dashboard
         </div>
     );
 };
