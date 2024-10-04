@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 import loginAnim from '@/animation/login.json';
 // import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useUserLogin } from "@/hooks/auth.hook";
+import Link from "next/link";
 
 
 type Inputs = {
@@ -28,9 +30,10 @@ const Login = () => {
         formState: { errors },
       } = useForm<Inputs>()
 
-    //   const [addLogin] = useLoginMutation()
+      const {mutate:loginData, isPending, error, data} = useUserLogin()
 
-      
+      console.log(error)
+      console.log(data)
 
       const onSubmit: SubmitHandler<Inputs> = async (data) => {
         try {
@@ -45,13 +48,8 @@ const Login = () => {
                return toast.error('password not added')
             }
 
-        //    const res=  await addLogin(data).unwrap() 
-        //    if(res){
-        //      localStorage.setItem('roomBridgeToken', JSON.stringify(res.token))
-        //      toast.success(res.message)
-        //      navigate.push('/')
-             
-        //    } 
+            loginData(data)
+            // console.log(data)
         
         } catch (error) {
             const err = error as ErrorResponse;
@@ -76,7 +74,7 @@ const Login = () => {
                 </div>
                 <div className="lg:w-[50%] md:w-[50%] sm:w-full xsm:w-full h-[100%] bg-gray-100">
 
-                <section className="px-5 py-5">
+                <section className="px-5 py-5 h-full relative">
                     <p  className="text-gray-700 text-3xl font-bold my-6">Login Form:</p>
                     <hr />
                     <br />
@@ -86,9 +84,14 @@ const Login = () => {
                         <br />
                         <input style={{background:'none',borderBottom:'1px solid lightgray'}} className='mb-3 w-[80%] ' type="text"  {...register("password")} placeholder='type password' />
                         <br />
+                        
                         <br />
-                        <input className='w-[100px] h-[35px] rounded-md bg-blue-500 text-white font-bold cursor-pointer' type="submit" value="SUBMIT" />
+                        <input className='w-[100px] h-[35px] rounded-md bg-blue-500 text-white font-bold cursor-pointer' type="submit" value={`${isPending ? 'loading...' : 'submit'}`} />
                     </form>
+                        <div className="w-[90%] flex items-center justify-between text-sm text-blue-400 absolute bottom-2">
+                           <Link href='/changePassword'><button>Change Password</button></Link>
+                           <button>Recovery Password</button>
+                        </div>
                 </section>
 
                 </div>

@@ -4,15 +4,13 @@ import { toast } from "react-toastify";
 import registrationAnim from '@/animation/registration.json';
 // import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useUserRegistration } from "@/hooks/auth.hook";
+import { useUserChangePassword } from "@/hooks/auth.hook";
 
 
 type Inputs = {
-    name: string;
     email: string;
-    password: string;
-    phone: number;
-    address: string;
+    oldPassword: string;
+    newPassword: string;
   }
 
   type ErrorResponse = {
@@ -21,7 +19,7 @@ type Inputs = {
     };
   };
 
-const Registration = () => {
+const ChangePassword = () => {
     // const navigate = useRouter();
     const {
         register,
@@ -29,25 +27,26 @@ const Registration = () => {
         formState: { errors },
       } = useForm<Inputs>()
 
-      const {mutate:registerData, isPending, data} = useUserRegistration();
+      const {mutate:changePasswordData, isPending, data} = useUserChangePassword();
       console.log(data)
 
       const onSubmit: SubmitHandler<Inputs> = async (data) => {
         try {
 
-            if(!data.email && !data.password && !data.name){
-                return toast.error('email and password not added')
+            if(!data.email && !data.oldPassword && !data.newPassword){
+                return toast.error('email old and new password not added')
             }
             if(!data.email){
                 return toast.error('email not added')
             }
-            if(!data.name){
-                return toast.error('name not added')
+            if(!data.oldPassword){
+                return toast.error('old not added')
             }
-            if(!data.password){
-               return toast.error('password not added')
+            if(!data.newPassword){
+               return toast.error('new password not added')
             }
-           registerData(data)
+        
+           changePasswordData({oldPassword: data?.oldPassword, newPassword: data?.newPassword})
         
         } catch (error) {
             const err = error as ErrorResponse;
@@ -73,17 +72,18 @@ const Registration = () => {
                 <div className="lg:w-[50%] md:w-[50%] sm:w-full xsm:w-full h-[100%] bg-gray-100">
 
                 <section className="px-5 py-5">
-                    <p  className="text-gray-700 text-3xl font-bold my-6">Registration Form:</p>
+                    <p  className="text-gray-700 text-3xl font-bold my-6">Change Password:</p>
                     <hr />
                     <br />
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <input style={{background:'none',borderBottom:'1px solid lightgray'}} className='mb-3 w-[80%] ' type="text" {...register("name")} placeholder='type your name' />
-                        {errors.name && <span>This field is required</span>}
-                        <br />
-                        <input style={{background:'none',borderBottom:'1px solid lightgray'}} className='mb-3 w-[80%] ' type="email" {...register("email")} placeholder='type your email' />
+                        <input style={{background:'none',borderBottom:'1px solid lightgray'}} className='mb-3 w-[80%] ' type="email" {...register("email")} placeholder='type your Email' />
                         {errors.email && <span>This field is required</span>}
                         <br />
-                        <input style={{background:'none',borderBottom:'1px solid lightgray'}} className='mb-3 w-[80%] ' type="password"  {...register("password")} placeholder='type password' />
+                        <input style={{background:'none',borderBottom:'1px solid lightgray'}} className='mb-3 w-[80%] ' type="password" {...register("oldPassword")} placeholder='type old Password' />
+                        {errors.oldPassword && <span>This field is required</span>}
+                        <br />
+                        <input style={{background:'none',borderBottom:'1px solid lightgray'}} className='mb-3 w-[80%] ' type="password"  {...register("newPassword")} placeholder='type new password' />
+                        {errors.newPassword && <span>This field is required</span>}
                         <br />
                         <br />
                         <input className='w-[100px] h-[35px] rounded-md bg-blue-500 text-white font-bold cursor-pointer' type="submit" value={`${isPending ? 'loading' : 'SUBMIT'}`} />
@@ -96,7 +96,7 @@ const Registration = () => {
     );
 };
 
-export default Registration;
+export default ChangePassword;
 
 
 
