@@ -2,12 +2,11 @@
 import { useLottie } from "lottie-react";
 import { toast } from "react-toastify";
 import registrationAnim from '@/animation/registration.json';
-// import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useUserRecoveryPassword, } from "@/hooks/auth.hook";
 import { useRouter, useSearchParams } from "next/navigation";
 import { jwtDecode, JwtPayload } from "jwt-decode";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 
 interface CustomJwtPayload extends JwtPayload {
     email?: string;
@@ -95,7 +94,8 @@ const RecoveryPassword = () => {
 
 
     return (
-        <div className="w-[100%] h-auto flex justify-center">
+        <Suspense  fallback={<div>Loading...</div>}>
+            <div className="w-[100%] h-auto flex justify-center">
             <div className="lg:w-[50%] md:w-[70%] sm:w-[100%] xsm:w-[100%] h-[500px] bg-gray-100 my-5 lg:flex md:flex">
                 <div className="lg:w-[50%] md:w-[50%] sm:w-full xsm:w-full h-[100%] bg-gray-200 p-5">
 
@@ -124,7 +124,8 @@ const RecoveryPassword = () => {
 
                 </div>
             </div>
-        </div>
+            </div>
+        </Suspense>
     );
 };
 
