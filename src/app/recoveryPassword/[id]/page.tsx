@@ -5,7 +5,7 @@ import registrationAnim from '@/animation/registration.json';
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useUserRecoveryPassword, } from "@/hooks/auth.hook";
 import { useRouter, useSearchParams} from "next/navigation";
-import {   useState } from "react";
+// import {   useState } from "react";
 // import { jwtDecoder } from "@/jwtDecoder/jwtDecoder";
 
 type Inputs = {
@@ -29,9 +29,9 @@ const RecoveryPassword = () => {
     const navigate = useRouter();
     const token = searchParams.get('token') as string;
     console.log(token)
-    const [exp, setExp] = useState(0);
-    const [email, setEmail] = useState('');
-    console.log(email)
+    // const [exp, setExp] = useState(0);
+    // const [email, setEmail] = useState('');
+    // console.log(email)
     console.log(token)
 
     // useEffect(() => {
@@ -46,7 +46,7 @@ const RecoveryPassword = () => {
 
     const currentTime = Math.floor(Date.now() / 1000);
     
-    const remainingTimeInSeconds = exp as number - currentTime;
+    const remainingTimeInSeconds = 9 as number - currentTime;
 
     const remainingMinutes = Math.floor(remainingTimeInSeconds / 60);
   
@@ -111,7 +111,7 @@ const RecoveryPassword = () => {
                     <br />
                     <form onSubmit={handleSubmit(onSubmit)}>
                         
-                        <input value={email} style={{background:'none',borderBottom:'1px solid lightgray'}} className='mb-3 w-[80%] ' type="email" {...register("email")} placeholder='type your email' />
+                        <input value={`opticalsoft21@gmail.com`} style={{background:'none',borderBottom:'1px solid lightgray'}} className='mb-3 w-[80%] ' type="email" {...register("email")} placeholder='type your email' />
                         {errors.email && <span>This field is required</span>}
                         <br />
                         <input style={{background:'none',borderBottom:'1px solid lightgray'}} className='mb-3 w-[80%] ' type="password"  {...register("password")} placeholder='type password' />
