@@ -4,8 +4,8 @@ import { toast } from "react-toastify";
 import registrationAnim from '@/animation/registration.json';
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useUserRecoveryPassword, } from "@/hooks/auth.hook";
-import { useRouter, useSearchParams } from "next/navigation";
 import {  useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 type Inputs = {
     name: string;
@@ -24,20 +24,16 @@ type Inputs = {
 
 const RecoveryPassword = () => {
 
-    const searchParams = useSearchParams();
     const [paramValue, setParamValue] = useState<string | null>(null);
     console.log(paramValue)
-    const navigate = useRouter();
-    const token = searchParams.get('token') as string;
-    console.log(token)
-
+    const router = useRouter();
+   
     useEffect(() => {
-       
-        if (searchParams) {
-          const value = searchParams.get('token');
-          setParamValue(value);
+        if (router.isReady) {
+          const value = router.query.token as string;
+          setParamValue(value || null);
         }
-      }, [searchParams]);
+      }, [router.isReady, router.query]);
 
  
 
@@ -57,7 +53,8 @@ const RecoveryPassword = () => {
       } = useForm<Inputs>()
 
       const {mutate:sendRecoveryPass, isPending, data} = useUserRecoveryPassword();
-    
+      
+      console.log(data)
 
       const onSubmit: SubmitHandler<Inputs> =(data) => {
         try {
@@ -83,13 +80,6 @@ const RecoveryPassword = () => {
     }
 
     const {View} = useLottie(options)
-
-    useEffect(() => {
-        if(data?.success){
-            navigate.push('/login')
-        }
-    },[data?.success, navigate])
-
 
     return (
         <div className="w-[100%] h-auto flex justify-center">
