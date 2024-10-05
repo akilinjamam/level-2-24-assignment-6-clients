@@ -5,8 +5,8 @@ import registrationAnim from '@/animation/registration.json';
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useUserRecoveryPassword, } from "@/hooks/auth.hook";
 import { useRouter, useSearchParams } from "next/navigation";
-import {  useEffect, useState } from "react";
-import { jwtDecoder } from "@/jwtDecoder/jwtDecoder";
+import {  useEffect } from "react";
+// import { jwtDecoder } from "@/jwtDecoder/jwtDecoder";
 
 
 
@@ -31,24 +31,24 @@ const RecoveryPassword = () => {
     const searchParams = useSearchParams();
     const navigate = useRouter();
     const token = searchParams.get('token') as string;
-    const [exp, setExp] = useState(0);
-    const [email, setEmail] = useState('');
+    // const [exp, setExp] = useState(0);
+    // const [email, setEmail] = useState('');
     console.log(token)
 
-    useEffect(() => {
-        const tokenValue = jwtDecoder(token);
+    // useEffect(() => {
+    //     const tokenValue = jwtDecoder(token);
 
-        setEmail(tokenValue?.email as string)
-        setExp(tokenValue?.exp as number)
-    },[token])
+    //     setEmail(tokenValue?.email as string)
+    //     setExp(tokenValue?.exp as number)
+    // },[token])
 
  
 
-    const currentTime = Math.floor(Date.now() / 1000);
+    // const currentTime = Math.floor(Date.now() / 1000);
     
-    const remainingTimeInSeconds = exp as number - currentTime;
+    // const remainingTimeInSeconds = exp as number - currentTime;
 
-    const remainingMinutes = Math.floor(remainingTimeInSeconds / 60);
+    // const remainingMinutes = Math.floor(remainingTimeInSeconds / 60);
   
 
 
@@ -65,7 +65,7 @@ const RecoveryPassword = () => {
       const onSubmit: SubmitHandler<Inputs> = async (data) => {
         try {
 
-            if( remainingMinutes  <= 0){
+            if( 9  <= 0){
                 return toast.error('token expired')
             }
 
@@ -107,12 +107,12 @@ const RecoveryPassword = () => {
                 <div className="lg:w-[50%] md:w-[50%] sm:w-full xsm:w-full h-[100%] bg-gray-100">
 
                 <section className="px-5 py-5">
-                    <p  className="text-gray-700 text-3xl font-bold my-6"> {remainingMinutes > 0 ? `Recover Password: will be expired after : ${remainingMinutes} minutes` : `Recovery Password Expired`}</p>
+                    <p  className="text-gray-700 text-3xl font-bold my-6"> {9 > 0 ? `Recover Password: will be expired after : ${9} minutes` : `Recovery Password Expired`}</p>
                     <hr />
                     <br />
                     <form onSubmit={handleSubmit(onSubmit)}>
                         
-                        <input value={email} style={{background:'none',borderBottom:'1px solid lightgray'}} className='mb-3 w-[80%] ' type="email" {...register("email")} placeholder='type your email' />
+                        <input value={`opticalsoft21@gmail.com`} style={{background:'none',borderBottom:'1px solid lightgray'}} className='mb-3 w-[80%] ' type="email" {...register("email")} placeholder='type your email' />
                         {errors.email && <span>This field is required</span>}
                         <br />
                         <input style={{background:'none',borderBottom:'1px solid lightgray'}} className='mb-3 w-[80%] ' type="password"  {...register("password")} placeholder='type password' />
