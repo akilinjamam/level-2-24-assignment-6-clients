@@ -4,8 +4,9 @@ import { toast } from "react-toastify";
 import registrationAnim from '@/animation/registration.json';
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useUserRecoveryPassword, } from "@/hooks/auth.hook";
-import { useRouter} from "next/navigation";
-import {  useEffect } from "react";
+import { useRouter, useSearchParams} from "next/navigation";
+import {  useEffect, useState } from "react";
+import { jwtDecoder } from "@/jwtDecoder/jwtDecoder";
 
 type Inputs = {
     name: string;
@@ -24,32 +25,30 @@ type Inputs = {
 
 const RecoveryPassword = () => {
 
-    // const searchParams = useSearchParams();
+    const searchParams = useSearchParams();
     const navigate = useRouter();
-    // const token = searchParams.get('token') as string;
-    // console.log(token)
-    // const [exp, setExp] = useState(0);
-    // const [email, setEmail] = useState('');
-    // console.log(token)
+    const token = searchParams.get('token') as string;
+    console.log(token)
+    const [exp, setExp] = useState(0);
+    const [email, setEmail] = useState('');
+    console.log(email)
+    console.log(token)
 
-    // useEffect(() => {
-    //     const tokenValue = jwtDecoder(token);
+    useEffect(() => {
+        const tokenValue = jwtDecoder(token);
 
-    //     setEmail(tokenValue?.email as string)
-    //     setExp(tokenValue?.exp as number)
-    // },[token])
+        setEmail(tokenValue?.email as string)
+        setExp(tokenValue?.exp as number)
+    },[token])
 
  
 
-    // const currentTime = Math.floor(Date.now() / 1000);
+    const currentTime = Math.floor(Date.now() / 1000);
     
-    // const remainingTimeInSeconds = exp as number - currentTime;
+    const remainingTimeInSeconds = exp as number - currentTime;
 
-    // const remainingMinutes = Math.floor(remainingTimeInSeconds / 60);
+    const remainingMinutes = Math.floor(remainingTimeInSeconds / 60);
   
-
-
-    // const navigate = useRouter();
     const {
         register,
         handleSubmit,
@@ -57,7 +56,9 @@ const RecoveryPassword = () => {
       } = useForm<Inputs>()
 
       const {mutate:sendRecoveryPass, isPending, data} = useUserRecoveryPassword();
-    
+      
+      console.log(navigate)
+      console.log(remainingMinutes)
 
       const onSubmit: SubmitHandler<Inputs> =(data) => {
         try {
