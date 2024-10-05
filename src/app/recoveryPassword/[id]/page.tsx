@@ -44,11 +44,11 @@ const RecoveryPassword = () => {
 
  
 
-    const currentTime = Math.floor(Date.now() / 1000);
+    // const currentTime = Math.floor(Date.now() / 1000);
     
-    const remainingTimeInSeconds = 9 as number - currentTime;
+    // const remainingTimeInSeconds = 9 as number - currentTime;
 
-    const remainingMinutes = Math.floor(remainingTimeInSeconds / 60);
+    // const remainingMinutes = Math.floor(remainingTimeInSeconds / 60);
   
     const {
         register,
@@ -59,7 +59,7 @@ const RecoveryPassword = () => {
       const {mutate:sendRecoveryPass, isPending, data} = useUserRecoveryPassword();
       console.log(data)
     //   console.log(navigate)
-      console.log(remainingMinutes)
+    //   console.log(remainingMinutes)
 
       const onSubmit: SubmitHandler<Inputs> =(data) => {
         try {
