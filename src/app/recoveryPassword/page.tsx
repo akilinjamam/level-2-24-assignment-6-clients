@@ -1,3 +1,17 @@
+import React from 'react';
+
+const RecoveryPassword = () => {
+    return (
+        <div>
+            this is recovery password
+        </div>
+    );
+};
+
+export default RecoveryPassword;
+
+
+
 // "use client"
 // import { useLottie } from "lottie-react";
 // import { toast } from "react-toastify";
