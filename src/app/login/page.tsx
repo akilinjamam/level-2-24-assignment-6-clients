@@ -50,7 +50,7 @@ const Login = () => {
             }
 
             loginData(data)
-            // console.log(data)
+           
         
         } catch (error) {
             const err = error as ErrorResponse;
