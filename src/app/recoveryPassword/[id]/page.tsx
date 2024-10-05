@@ -35,11 +35,12 @@ const RecoveryPassword = () => {
     console.log(token)
 
     useEffect(() => {
-        const tokenValue = jwtDecoder(token);
-
-        setEmail(tokenValue?.email as string)
-        setExp(tokenValue?.exp as number)
-    },[token])
+        if (typeof window !== 'undefined') {
+          const tokenValue = jwtDecoder(token);
+          setEmail(tokenValue?.email as string);
+          setExp(tokenValue?.exp as number);
+        }
+      }, [token]);
 
  
 
@@ -63,7 +64,7 @@ const RecoveryPassword = () => {
       const onSubmit: SubmitHandler<Inputs> =(data) => {
         try {
 
-            if( 9  <= 0){
+            if( remainingMinutes  <= 0){
                 return toast.error('token expired')
             }
 
@@ -86,10 +87,10 @@ const RecoveryPassword = () => {
     const {View} = useLottie(options)
 
     useEffect(() => {
-        if(data?.success){
-            navigate.push('/login')
+        if (typeof window !== 'undefined' && data?.success) {
+          navigate.push('/login');
         }
-    },[data?.success, navigate])
+      }, [data?.success, navigate]);
 
 
     return (
@@ -105,7 +106,7 @@ const RecoveryPassword = () => {
                 <div className="lg:w-[50%] md:w-[50%] sm:w-full xsm:w-full h-[100%] bg-gray-100">
 
                 <section className="px-5 py-5">
-                    <p  className="text-gray-700 text-3xl font-bold my-6"> {9 > 0 ? `Recover Password: will be expired after : ${remainingMinutes} minutes` : `Recovery Password Expired`}</p>
+                    <p  className="text-gray-700 text-3xl font-bold my-6"> {remainingMinutes > 0 ? `Recover Password: will be expired after : ${remainingMinutes} minutes` : `Recovery Password Expired`}</p>
                     <hr />
                     <br />
                     <form onSubmit={handleSubmit(onSubmit)}>
