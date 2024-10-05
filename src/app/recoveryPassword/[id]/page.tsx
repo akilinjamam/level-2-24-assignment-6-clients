@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import registrationAnim from '@/animation/registration.json';
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useUserRecoveryPassword, } from "@/hooks/auth.hook";
-import { useRouter, useSearchParams} from "next/navigation";
+import {  useSearchParams} from "next/navigation";
 // import {   useState } from "react";
 // import { jwtDecoder } from "@/jwtDecoder/jwtDecoder";
 
@@ -26,13 +26,13 @@ type Inputs = {
 const RecoveryPassword = () => {
 
     const searchParams = useSearchParams();
-    const navigate = useRouter();
+    // const navigate = useRouter();
     const token = searchParams.get('token') as string;
     console.log(token)
     // const [exp, setExp] = useState(0);
     // const [email, setEmail] = useState('');
     // console.log(email)
-    console.log(token)
+   
 
     // useEffect(() => {
     //     if (typeof window !== 'undefined') {
@@ -58,7 +58,7 @@ const RecoveryPassword = () => {
 
       const {mutate:sendRecoveryPass, isPending, data} = useUserRecoveryPassword();
       console.log(data)
-      console.log(navigate)
+    //   console.log(navigate)
       console.log(remainingMinutes)
 
       const onSubmit: SubmitHandler<Inputs> =(data) => {
