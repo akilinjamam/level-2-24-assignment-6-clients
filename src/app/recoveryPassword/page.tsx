@@ -5,7 +5,7 @@ import registrationAnim from '@/animation/registration.json';
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useUserRecoveryPassword, } from "@/hooks/auth.hook";
 import { useRouter, useSearchParams } from "next/navigation";
-import {  useEffect } from "react";
+import {  useEffect, useState } from "react";
 
 type Inputs = {
     name: string;
@@ -25,19 +25,19 @@ type Inputs = {
 const RecoveryPassword = () => {
 
     const searchParams = useSearchParams();
+    const [paramValue, setParamValue] = useState<string | null>(null);
+    console.log(paramValue)
     const navigate = useRouter();
     const token = searchParams.get('token') as string;
     console.log(token)
-    // const [exp, setExp] = useState(0);
-    // const [email, setEmail] = useState('');
-    // console.log(token)
 
-    // useEffect(() => {
-    //     const tokenValue = jwtDecoder(token);
-
-    //     setEmail(tokenValue?.email as string)
-    //     setExp(tokenValue?.exp as number)
-    // },[token])
+    useEffect(() => {
+       
+        if (searchParams) {
+          const value = searchParams.get('token');
+          setParamValue(value);
+        }
+      }, [searchParams]);
 
  
 
@@ -59,7 +59,7 @@ const RecoveryPassword = () => {
       const {mutate:sendRecoveryPass, isPending, data} = useUserRecoveryPassword();
     
 
-      const onSubmit: SubmitHandler<Inputs> = async (data) => {
+      const onSubmit: SubmitHandler<Inputs> =(data) => {
         try {
 
             if( 9  <= 0){
