@@ -69,13 +69,7 @@ const RecoveryPassword = () => {
                 return toast.error('token expired')
             }
 
-            if(!data.email && !data.password){
-                return toast.error('email and password not added')
-            }
-            if(!data.email){
-                return toast.error('email not added')
-            }
-            
+                        
             if(!data.password){
                return toast.error('password not added')
             }
