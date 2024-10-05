@@ -4,8 +4,9 @@ import { toast } from "react-toastify";
 import loginAnim from '@/animation/login.json';
 // import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useUserLogin } from "@/hooks/auth.hook";
+import { useUserLogin, useUserSendRecoveryEmail } from "@/hooks/auth.hook";
 import Link from "next/link";
+import { useState } from "react";
 
 
 type Inputs = {
@@ -24,6 +25,7 @@ type Inputs = {
 
 const Login = () => {
     // const navigate = useRouter();
+    const [email, setEmail] = useState('');
     const {
         register,
         handleSubmit,
@@ -62,6 +64,19 @@ const Login = () => {
     }
 
     const {View} = useLottie(options)
+
+    const {mutate:sendEmail, data:emailData} = useUserSendRecoveryEmail()
+    console.log(emailData)
+    const handleRecovery = async() => {
+
+        if(email === ''){
+            return toast.error('please provide your email address')
+        }
+
+        sendEmail({email: email})
+    }
+
+
     return (
         <div className="w-[100%] h-auto flex justify-center">
             <div className="lg:w-[50%] md:w-[70%] sm:w-[100%] xsm:w-[100%] h-[500px] bg-gray-100 my-5 lg:flex md:flex">
@@ -79,7 +94,7 @@ const Login = () => {
                     <hr />
                     <br />
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <input style={{background:'none',borderBottom:'1px solid lightgray'}} className='mb-3 w-[80%] ' type="email" {...register("email")} placeholder='type your email' />
+                        <input style={{background:'none',borderBottom:'1px solid lightgray'}} className='mb-3 w-[80%] ' type="email" {...register("email")} placeholder='type your email' onChange={(e) => setEmail(e.target.value)}/>
                         {errors.email && <span>This field is required</span>}
                         <br />
                         <input style={{background:'none',borderBottom:'1px solid lightgray'}} className='mb-3 w-[80%] ' type="text"  {...register("password")} placeholder='type password' />
@@ -90,7 +105,7 @@ const Login = () => {
                     </form>
                         <div className="w-[90%] flex items-center justify-between text-sm text-blue-400 absolute bottom-2">
                            <Link href='/changePassword'><button>Change Password</button></Link>
-                           <button>Recovery Password</button>
+                           <button onClick={handleRecovery}>Recovery Password</button>
                         </div>
                 </section>
 

@@ -62,3 +62,41 @@ export const userChangePassword = async (userData: FieldValues) => {
     }
   }
 };
+
+export const userSendRecoveryPassword = async (userData: FieldValues) => {
+  try {
+    const { data } = await axiosInstance.post(
+      "/api/auth/send-recovery-password",
+      userData
+    );
+    return data;
+  } catch (error: any) {
+    if (error.response) {
+      const errorMessage = error.response.data?.message || "failed.";
+      throw new Error(errorMessage);
+    } else {
+      throw new Error(
+        error.message || "An unknown error occurred during password change..."
+      );
+    }
+  }
+};
+
+export const userSendRecoveryEmail = async (userData: FieldValues) => {
+  try {
+    const { data } = await axiosInstance.post(
+      "/api/auth/password-recovery",
+      userData
+    );
+    return data;
+  } catch (error: any) {
+    if (error.response) {
+      const errorMessage = error.response.data?.message || "failed.";
+      throw new Error(errorMessage);
+    } else {
+      throw new Error(
+        error.message || "An unknown error occurred during password change..."
+      );
+    }
+  }
+};

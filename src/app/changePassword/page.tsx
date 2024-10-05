@@ -5,6 +5,7 @@ import registrationAnim from '@/animation/registration.json';
 // import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useUserChangePassword } from "@/hooks/auth.hook";
+import Link from "next/link";
 
 
 type Inputs = {
@@ -71,7 +72,7 @@ const ChangePassword = () => {
                 </div>
                 <div className="lg:w-[50%] md:w-[50%] sm:w-full xsm:w-full h-[100%] bg-gray-100">
 
-                <section className="px-5 py-5">
+                <section className="px-5 py-5 h-full relative">
                     <p  className="text-gray-700 text-3xl font-bold my-6">Change Password:</p>
                     <hr />
                     <br />
@@ -86,10 +87,12 @@ const ChangePassword = () => {
                         {errors.newPassword && <span>This field is required</span>}
                         <br />
                         <br />
-                        <input className='w-[100px] h-[35px] rounded-md bg-blue-500 text-white font-bold cursor-pointer' type="submit" value={`${isPending ? 'loading' : 'SUBMIT'}`} />
+                        <input className='w-[100px] h-[35px] rounded-md bg-blue-500 text-white font-bold cursor-pointer' type="submit" value={`${isPending ? 'loading..' : 'SUBMIT'}`} />
                     </form>
+                    <Link href='/login'>
+                        <button className="bg-blue-500 text-white font-bold px-3 py-1 rounded absolute bottom-3 right-3">BACK</button>
+                    </Link>
                 </section>
-
                 </div>
             </div>
         </div>

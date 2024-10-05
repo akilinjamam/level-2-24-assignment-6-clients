@@ -3,6 +3,8 @@ import {
   loginUser,
   registerUser,
   userChangePassword,
+  userSendRecoveryEmail,
+  userSendRecoveryPassword,
 } from "@/service/authService";
 import { useMutation } from "@tanstack/react-query";
 import { FieldValues } from "react-hook-form";
@@ -39,6 +41,32 @@ export const useUserChangePassword = () => {
     mutationFn: async (userData) => await userChangePassword(userData),
     onSuccess: () => {
       toast.success("Password changed successfully.");
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+};
+
+export const useUserRecoveryPassword = () => {
+  return useMutation<any, Error, FieldValues>({
+    mutationKey: ["USER_CHANGE_PASSWORD"],
+    mutationFn: async (userData) => await userSendRecoveryPassword(userData),
+    onSuccess: () => {
+      toast.success("Password changed successfully.");
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+};
+
+export const useUserSendRecoveryEmail = () => {
+  return useMutation<any, Error, FieldValues>({
+    mutationKey: ["USER__PASSWORD"],
+    mutationFn: async (data) => await userSendRecoveryEmail(data),
+    onSuccess: () => {
+      toast.success("an Email has been sent to you. please check");
     },
     onError: (error) => {
       toast.error(error.message);
