@@ -33,14 +33,15 @@ export const loginUser = async (userData: FieldValues) => {
     }
     return data;
   } catch (error: any) {
-    if (error.response) {
-      const errorMessage = error.response.data?.message || "Login failed.";
-      throw new Error(errorMessage);
-    } else {
-      throw new Error(
-        error.message || "An unknown error occurred during login."
-      );
-    }
+    // if (error.response) {
+    //   const errorMessage = error.response.data?.message || "Login failed.";
+    //   throw new Error(errorMessage);
+    // } else {
+    //   throw new Error(
+    //     error.message || "An unknown error occurred during login."
+    //   );
+    // }
+    throw new Error(error);
   }
 };
 
