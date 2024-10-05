@@ -46,7 +46,7 @@ const RecoveryPassword = () => {
 
     const currentTime = Math.floor(Date.now() / 1000);
     
-    const remainingTimeInSeconds = 500 as number - currentTime;
+    const remainingTimeInSeconds = 9 as number - currentTime;
 
     const remainingMinutes = Math.floor(remainingTimeInSeconds / 60);
   
@@ -106,7 +106,7 @@ const RecoveryPassword = () => {
                 <div className="lg:w-[50%] md:w-[50%] sm:w-full xsm:w-full h-[100%] bg-gray-100">
 
                 <section className="px-5 py-5">
-                    <p  className="text-gray-700 text-3xl font-bold my-6"> {remainingMinutes > 0 ? `Recover Password: will be expired after : ${remainingMinutes} minutes` : `Recovery Password Expired`}</p>
+                    <p  className="text-gray-700 text-3xl font-bold my-6"> {500 > 0 ? `Recover Password: will be expired after : ${500} minutes` : `Recovery Password Expired`}</p>
                     <hr />
                     <br />
                     <form onSubmit={handleSubmit(onSubmit)}>
