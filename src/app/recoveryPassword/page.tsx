@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import { useLottie } from "lottie-react";
 import { toast } from "react-toastify";
 import registrationAnim from '@/animation/registration.json';
@@ -31,8 +31,7 @@ const RecoveryPassword = () => {
     const searchParams = useSearchParams();
     const navigate = useRouter();
     const token = searchParams.get('token') as string;
-    console.log(token)
-
+   
     const decode = jwtDecode<CustomJwtPayload>(token) 
 
     const {exp, email} = decode;
@@ -58,7 +57,7 @@ const RecoveryPassword = () => {
       const onSubmit: SubmitHandler<Inputs> = async (data) => {
         try {
 
-            if(exp as number <= 0){
+            if(remainingMinutes <= 0){
                 return toast.error('token expired')
             }
 
@@ -106,7 +105,9 @@ const RecoveryPassword = () => {
                 <div className="lg:w-[50%] md:w-[50%] sm:w-full xsm:w-full h-[100%] bg-gray-100">
 
                 <section className="px-5 py-5">
-                    <p  className="text-gray-700 text-3xl font-bold my-6">Recover Password: will be expired : {remainingMinutes}</p>
+                <p className="text-gray-700 text-3xl font-bold my-6">
+              Recover Password: will expire in {remainingMinutes} minutes
+            </p>
                     <hr />
                     <br />
                     <form onSubmit={handleSubmit(onSubmit)}>
