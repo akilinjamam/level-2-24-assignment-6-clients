@@ -4,11 +4,8 @@ import { toast } from "react-toastify";
 import registrationAnim from '@/animation/registration.json';
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useUserRecoveryPassword, } from "@/hooks/auth.hook";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import {  useEffect } from "react";
-// import { jwtDecoder } from "@/jwtDecoder/jwtDecoder";
-
-
 
 type Inputs = {
     name: string;
@@ -25,12 +22,12 @@ type Inputs = {
   };
 
 
-
 const RecoveryPassword = () => {
 
-    // const searchParams = useSearchParams();
+    const searchParams = useSearchParams();
     const navigate = useRouter();
-    // const token = searchParams.get('token') as string;
+    const token = searchParams.get('token') as string;
+    console.log(token)
     // const [exp, setExp] = useState(0);
     // const [email, setEmail] = useState('');
     // console.log(token)
