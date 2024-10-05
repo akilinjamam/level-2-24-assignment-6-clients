@@ -56,8 +56,7 @@ export const useUserRecoveryPassword = () => {
       toast.success("Password changed successfully.");
     },
     onError: (error) => {
-      console.log(error);
-      toast.error("something went wrong");
+      toast.error(error.message);
     },
   });
 };

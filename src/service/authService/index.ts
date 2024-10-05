@@ -35,11 +35,10 @@ export const loginUser = async (userData: FieldValues) => {
   } catch (error: any) {
     if (error.response) {
       const errorMessage = error.response.data?.message || "Login failed.";
-      throw new Error(errorMessage);
+      // throw new Error(errorMessage);
+      return errorMessage;
     } else {
-      throw new Error(
-        error.message || "An unknown error occurred during login."
-      );
+      return error.message;
     }
   }
 };
