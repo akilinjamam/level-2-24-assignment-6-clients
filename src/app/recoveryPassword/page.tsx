@@ -28,10 +28,9 @@ type Inputs = {
 const RecoveryPassword = () => {
   const searchParams = useSearchParams();
   const navigate = useRouter();
-  const token = searchParams.get('token') as string;
-
   const [email, setEmail] = useState<string | null>(null);
   const [remainingMinutes, setRemainingMinutes] = useState<number | null>(null);
+  const [isTokenValid, setIsTokenValid] = useState<boolean | null>(null);
 
   // Function to decode the token and calculate remaining time
   const decodeToken = (token: string) => {
@@ -49,23 +48,28 @@ const RecoveryPassword = () => {
 
       if (minutesLeft <= 0) {
         toast.error('Token has expired');
-        navigate.push('/login');
+        setIsTokenValid(false);
       } else {
         setEmail(email || '');
         setRemainingMinutes(minutesLeft);
+        setIsTokenValid(true);
       }
     } catch (error) {
       toast.error('Invalid token');
-      navigate.push('/login');
+      setIsTokenValid(false);
     }
   };
 
   // Decode the token on initial render
   useEffect(() => {
+    const token = searchParams.get('token') as string;
     if (token) {
       decodeToken(token);
+    } else {
+      toast.error('No token provided');
+      setIsTokenValid(false);
     }
-  }, [token]);
+  }, [searchParams]);
 
   const {
     register,
@@ -112,47 +116,45 @@ const RecoveryPassword = () => {
         </div>
         <div className="lg:w-[50%] md:w-[50%] sm:w-full xsm:w-full h-[100%] bg-gray-100">
           <section className="px-5 py-5">
-            {remainingMinutes !== null ? (
+            {isTokenValid === null ? (
               <p className="text-gray-700 text-3xl font-bold my-6">
-                Recover Password: {remainingMinutes} minutes remaining
+                Verifying token...
               </p>
+            ) : isTokenValid ? (
+              <>
+                <p className="text-gray-700 text-3xl font-bold my-6">
+                  Recover Password: {remainingMinutes} minutes remaining
+                </p>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <input
+                    readOnly
+                    value={email || ''}
+                    style={{ background: 'none', borderBottom: '1px solid lightgray' }}
+                    className="mb-3 w-[80%]"
+                    type="email"
+                    placeholder="Email"
+                  />
+                  <br />
+                  <input
+                    style={{ background: 'none', borderBottom: '1px solid lightgray' }}
+                    className="mb-3 w-[80%]"
+                    type="password"
+                    {...register('password', { required: true })}
+                    placeholder="Enter new password"
+                  />
+                  {errors.password && <span>This field is required</span>}
+                  <br />
+
+                  <input
+                    className="w-[100px] h-[35px] rounded-md bg-blue-500 text-white font-bold cursor-pointer"
+                    type="submit"
+                    value={`${isPending ? 'Loading...' : 'Submit'}`}
+                  />
+                </form>
+              </>
             ) : (
-              <p className="text-gray-700 text-3xl font-bold my-6">
-                Loading token information...
-              </p>
+              <p className="text-red-500 text-3xl font-bold my-6">Token is invalid or expired.</p>
             )}
-
-            <hr />
-            <br />
-
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <input
-                readOnly
-                value={email || ''}
-                style={{ background: 'none', borderBottom: '1px solid lightgray' }}
-                className="mb-3 w-[80%]"
-                type="email"
-                placeholder="Email"
-              />
-              {errors.email && <span>This field is required</span>}
-              <br />
-
-              <input
-                style={{ background: 'none', borderBottom: '1px solid lightgray' }}
-                className="mb-3 w-[80%]"
-                type="password"
-                {...register('password', { required: true })}
-                placeholder="Enter new password"
-              />
-              {errors.password && <span>This field is required</span>}
-              <br />
-
-              <input
-                className="w-[100px] h-[35px] rounded-md bg-blue-500 text-white font-bold cursor-pointer"
-                type="submit"
-                value={`${isPending ? 'Loading...' : 'Submit'}`}
-              />
-            </form>
           </section>
         </div>
       </div>
