@@ -8,7 +8,6 @@ import { useUserLogin, useUserSendRecoveryEmail } from "@/hooks/auth.hook";
 import Link from "next/link";
 import { useState } from "react";
 
-
 type Inputs = {
     name: string;
     email: string;
