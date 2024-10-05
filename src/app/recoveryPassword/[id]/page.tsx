@@ -64,7 +64,7 @@ const RecoveryPassword = () => {
       const onSubmit: SubmitHandler<Inputs> =(data) => {
         try {
 
-            if( remainingMinutes  <= 0){
+            if( 500  <= 0){
                 return toast.error('token expired')
             }
 
