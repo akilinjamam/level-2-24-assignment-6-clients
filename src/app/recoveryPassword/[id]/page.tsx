@@ -46,7 +46,7 @@ const RecoveryPassword = () => {
 
     const currentTime = Math.floor(Date.now() / 1000);
     
-    const remainingTimeInSeconds = 9 as number - currentTime;
+    const remainingTimeInSeconds = 500 as number - currentTime;
 
     const remainingMinutes = Math.floor(remainingTimeInSeconds / 60);
   
