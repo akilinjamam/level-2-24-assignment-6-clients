@@ -5,8 +5,8 @@ import registrationAnim from '@/animation/registration.json';
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useUserRecoveryPassword, } from "@/hooks/auth.hook";
 import { useRouter, useSearchParams} from "next/navigation";
-import {  useEffect, useState } from "react";
-import { jwtDecoder } from "@/jwtDecoder/jwtDecoder";
+import {   useState } from "react";
+// import { jwtDecoder } from "@/jwtDecoder/jwtDecoder";
 
 type Inputs = {
     name: string;
@@ -34,13 +34,13 @@ const RecoveryPassword = () => {
     console.log(email)
     console.log(token)
 
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-          const tokenValue = jwtDecoder(token);
-          setEmail(tokenValue?.email as string);
-          setExp(tokenValue?.exp as number);
-        }
-      }, [token]);
+    // useEffect(() => {
+    //     if (typeof window !== 'undefined') {
+    //       const tokenValue = jwtDecoder(token);
+    //       setEmail(tokenValue?.email as string);
+    //       setExp(tokenValue?.exp as number);
+    //     }
+    //   }, [token]);
 
  
 
@@ -57,7 +57,7 @@ const RecoveryPassword = () => {
       } = useForm<Inputs>()
 
       const {mutate:sendRecoveryPass, isPending, data} = useUserRecoveryPassword();
-      
+      console.log(data)
       console.log(navigate)
       console.log(remainingMinutes)
 
@@ -86,11 +86,11 @@ const RecoveryPassword = () => {
 
     const {View} = useLottie(options)
 
-    useEffect(() => {
-        if (typeof window !== 'undefined' && data?.success) {
-          navigate.push('/login');
-        }
-      }, [data?.success, navigate]);
+    // useEffect(() => {
+    //     if (typeof window !== 'undefined' && data?.success) {
+    //       navigate.push('/login');
+    //     }
+    //   }, [data?.success, navigate]);
 
 
     return (
