@@ -61,7 +61,7 @@ const RecoveryPassword = () => {
     //   console.log(navigate)
     //   console.log(remainingMinutes)
 
-      const onSubmit: SubmitHandler<Inputs> =(data) => {
+      const onSubmit: SubmitHandler<Inputs> = async (data) => {
         try {
 
             if( 500  <= 0){
