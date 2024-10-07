@@ -2,9 +2,10 @@
 import { useLottie } from "lottie-react";
 import { toast } from "react-toastify";
 import registrationAnim from '@/animation/registration.json';
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useUserRegistration } from "@/hooks/auth.hook";
+import { useEffect } from "react";
 
 
 type Inputs = {
@@ -22,7 +23,7 @@ type Inputs = {
   };
 
 const Registration = () => {
-    // const navigate = useRouter();
+    const navigate = useRouter();
     const {
         register,
         handleSubmit,
@@ -60,6 +61,14 @@ const Registration = () => {
     }
 
     const {View} = useLottie(options)
+
+    useEffect(() => {
+        if (typeof window !== 'undefined' && data?.success) {
+          navigate.push('/login');
+        }
+      }, [data?.success, navigate]);
+
+
     return (
         <div className="w-[100%] h-auto flex justify-center">
             <div className="lg:w-[50%] md:w-[70%] sm:w-[100%] xsm:w-[100%] h-[500px] bg-gray-100 my-5 lg:flex md:flex">

@@ -2,11 +2,12 @@
 import { useLottie } from "lottie-react";
 import { toast } from "react-toastify";
 import loginAnim from '@/animation/login.json';
-// import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useUserLogin, useUserSendRecoveryEmail } from "@/hooks/auth.hook";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+
 
 type Inputs = {
     name: string;
@@ -23,7 +24,7 @@ type Inputs = {
   };
 
 const Login = () => {
-    // const navigate = useRouter();
+    const navigate = useRouter();
     const [email, setEmail] = useState('');
     const {
         register,
@@ -75,7 +76,11 @@ const Login = () => {
         sendEmail({email: email})
     }
 
-
+    useEffect(() => {
+        if (typeof window !== 'undefined' && data?.success) {
+          navigate.push('/profile');
+        }
+      }, [data?.success, navigate]);
     return (
         <div className="w-[100%] h-auto flex justify-center">
             <div className="lg:w-[50%] md:w-[70%] sm:w-[100%] xsm:w-[100%] h-[500px] bg-gray-100 my-5 lg:flex md:flex">

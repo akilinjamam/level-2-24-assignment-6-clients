@@ -20,6 +20,15 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+
+.hide{
+  display: none;
+}
+
+.viewWithHover:hover .hide {
+  display: block;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
