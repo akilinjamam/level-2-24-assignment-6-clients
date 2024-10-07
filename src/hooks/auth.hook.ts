@@ -56,8 +56,12 @@ export const useUserRecoveryPassword = () => {
   return useMutation<any, Error, FieldValues>({
     mutationKey: ["USER_CHANGE_PASSWORD"],
     mutationFn: async (userData) => await userSendRecoveryPassword(userData),
-    onSuccess: () => {
-      toast.success("Password changed successfully.");
+    onSuccess: (data) => {
+      if (data?.success) {
+        toast.success(data?.message);
+      } else {
+        toast.error(data?.message);
+      }
     },
     onError: (error) => {
       toast.error(error.message);
