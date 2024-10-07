@@ -33,27 +33,12 @@ export const loginUser = async (userData: FieldValues) => {
     }
     return data;
   } catch (error: any) {
-    const isProduction = process.env.NODE_ENV === "production";
-
     if (error.response) {
       const errorMessage = error.response.data?.message || "Login failed.";
-
-      if (!isProduction) {
-        console.error("Server error:", error.response);
-      }
-
-      throw new Error(
-        isProduction ? "Something went wrong, please try again." : errorMessage
-      );
+      throw new Error(errorMessage);
     } else {
-      if (!isProduction) {
-        console.error("Unknown error:", error);
-      }
-
       throw new Error(
-        isProduction
-          ? "An unknown error occurred."
-          : error.message || "An unknown error occurred during login."
+        error.message || "An unknown error occurred during login."
       );
     }
   }
