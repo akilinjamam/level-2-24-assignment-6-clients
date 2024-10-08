@@ -1,7 +1,12 @@
-export default function Home() {
-  return (
-   <>
-    hello
-   </>
-  );
-}
+const Home = () => {
+    
+    return (
+        <div className="w-full min-h-[1200px] my-2">
+            <div className="w-[50%] min-h-[1200px] bg-gray-100 mx-auto">
+                
+            </div>
+        </div>
+    );
+};
+
+export default Home;

@@ -1,4 +1,5 @@
 "use server";
+import { jwtDecoder } from "@/jwtDecoder/jwtDecoder";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axiosInstance from "@/libs/AxiosInstance";
 import { cookies } from "next/headers";
@@ -99,4 +100,20 @@ export const userSendRecoveryEmail = async (userData: FieldValues) => {
       );
     }
   }
+};
+
+export const getCurrentUser = () => {
+  const accessToken = cookies().get("accessToken")?.value;
+
+  let decodedToken = null;
+
+  if (accessToken) {
+    decodedToken = jwtDecoder(accessToken);
+
+    return {
+      email: decodedToken.email,
+    };
+  }
+
+  return decodedToken;
 };
