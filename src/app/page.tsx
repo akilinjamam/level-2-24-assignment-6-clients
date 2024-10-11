@@ -52,6 +52,10 @@ const Home = async () => {
                                         <p>{item?.name}</p>
                                     </div>
                                 </div>
+                                <div className="bg-gray-300 px-2 py-1 font-bold text-blue-500 cursor-pointer">
+                                <i className="uil uil-plus"></i>
+                                    <span>Follow</span>
+                                </div>
                                 
                             </div>
                             {/* image section */}
