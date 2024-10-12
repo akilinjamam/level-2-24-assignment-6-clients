@@ -18,7 +18,7 @@ const LightGalleryImage = ({item} : {item:TPosts}) => {
         <div>
             <LightGallery elementClassNames='w-[100%] h-auto flex flex-wrap' speed={500} plugins={[lgThumbnail,lgZoom]}>
                 {
-                    item?.images?.slice(0,4).map((image, index) => {
+                    item?.images?.slice(0,).map((image, index) => {
                         
                         return (
                             

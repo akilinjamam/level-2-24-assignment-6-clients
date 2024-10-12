@@ -39,10 +39,10 @@ const ProfileImages = () => {
         <div>
             <section className="w-full h-[400px] bg-gray-200 relative overflow: 'hidden'">
             <div className='w-full h-[400px] overflow-hidden '>
-                <Image style={{width:'100%', height:'auto'}} width={1000} height={700} priority src={userData?.coverImg || fallbackImg}  alt='cover-image'/>
+                <Image style={{width:'100%', height:'auto'}} width={1000} height={700} priority src={userData?.coverImg === 'add cover img' ? fallbackImg : userData?.coverImg || fallbackImg}  alt='cover-image'/>
             </div>
             <div className="w-[300px] h-[300px] rounded-full bg-gray-300 absolute left-[20px] bottom-[-70px] viewWithHover z-10 overflow-hidden ">
-                <Image className='absolute inset-x-10 inset-y-12 w-full h-full object-cover scale-150 ' style={{width:'100%', height:'auto'}} width={300} height={300} priority src={userData?.profileImg || fallbackImg}  alt='cover-image'/>
+                <Image className='absolute inset-x-10 inset-y-12 w-full h-full object-cover scale-150 ' style={{width:'100%', height:'auto'}} width={300} height={300} priority src={userData?.profileImg === ('add profile img') ? (fallbackImg) : userData?.profileImg || fallbackImg}  alt='profile-image'/>
                 <label  htmlFor="image">
                     <i className="uil uil-pen absolute bottom-[70px] right-[30px] hide cursor-pointer bg-gray-200 px-2 rounded-full text-blue-500"></i>
                 </label>
