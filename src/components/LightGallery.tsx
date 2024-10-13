@@ -26,9 +26,9 @@ const LightGalleryImage = ({item} : {item:TPosts}) => {
                                     {
                                         item?.images?.length > 1 
                                         ?
-                                        <Image width={455} height={455} src={image || fallbackImg} alt={`image-${index+1}`}/>
+                                        <Image className='w-[455px] h-[350px]' width={455} height={455} src={image || fallbackImg} alt={`image-${index+1}`}/>
                                         :
-                                        <Image width={1000} height={1000} src={image || fallbackImg} alt={`image-${index+1}`}/>
+                                        <Image  width={1000} height={1000} src={image || fallbackImg} alt={`image-${index+1}`}/>
                                     }
                                 </Link>
                            

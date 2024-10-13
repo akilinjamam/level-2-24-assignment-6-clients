@@ -69,7 +69,8 @@ const Home = async () => {
 
                         {/* Description */}
                         <div className="w-full ml-1">
-                            <p>{item?.description}</p>
+                            <div dangerouslySetInnerHTML={{ __html:item?.description  }} />
+                            
                         </div>
                         <br />
 
