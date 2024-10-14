@@ -1,5 +1,5 @@
 "use client"
-import { AppWrapper } from "@/contextApi";
+// import { AppWrapper } from "@/contextApi";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactNode } from "react";
 
@@ -9,9 +9,9 @@ const Providers = ({children} : {children: ReactNode}) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AppWrapper>
+      {/* <AppWrapper> */}
         {children}
-      </AppWrapper>
+      {/* </AppWrapper> */}
     </QueryClientProvider>
   );
 };

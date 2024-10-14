@@ -1,6 +1,6 @@
 "use server"
 import MyNewsFeeds from "@/components/newsFeeds/MyNewsFeeds";
-import ProfileImages from "@/components/ProfileImages";
+import ProfileImg from "@/components/ProfileImg";
 import { jwtDecoder } from "@/jwtDecoder/jwtDecoder";
 import { TPosts } from "@/types/posts.type";
 import { cookies } from "next/headers";
@@ -43,13 +43,9 @@ const Profile = async () => {
     console.log(findMyPosts)
 
     return (
-        <div className="w-full min-h-auto my-2 relative">
-            <div className="w-[50%] min-h-[1000px] bg-gray-200 mx-auto">
-                <ProfileImages userInfo={userInfo}/>     
-            </div>
-            <div className="w-[50%] h-auto bg-gray-200 mx-auto">
-                <MyNewsFeeds data={findMyPosts} accessToken={accessToken}/>
-            </div>
+        <div>
+            <ProfileImg userInfo={userInfo}/>
+            <MyNewsFeeds data={findMyPosts} accessToken={accessToken}/>
         </div>
     );
 };

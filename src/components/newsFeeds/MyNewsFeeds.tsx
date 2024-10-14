@@ -9,12 +9,12 @@ import fallbackImg from './../../../images/default-fallback-image.png';
 
 const MyNewsFeeds = ({data, accessToken}: {data:any, accessToken:string}) => {
     return (
-        <div className="w-full h-auto my-2">
+        <div className="w-[50%] mx-auto h-auto my-2">
             <div className="w-[100%] h-auto bg-gray-100 mx-auto p-2">
                 {data?.map((item: TPosts, index: number) => (
                     <div className="bg-gray-200 mb-3" key={index + 1}>
                         <div className="w-full h-[50px] flex items-center justify-between px-2">
-                            <div className="w-[200px] flex items-center font-bold">
+                            <div className="w-auto flex items-center font-bold">
                                 <div className="w-[35px] h-[35px] rounded-full bg-gray-300 overflow-hidden">
                                     <Image className="scale-125 mt-2" width={200} height={200} src={item?.userId?.profileImg || fallbackImg} alt="" />
                                 </div>
