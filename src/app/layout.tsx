@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Providers from "@/libs/provider";
 import { cookies } from "next/headers";
 import { jwtDecoder } from "@/jwtDecoder/jwtDecoder";
-import AddPostModal from "@/components/modal/AddPostModal";
+// import AddPostModal from "@/components/modal/AddPostModal";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -48,7 +48,7 @@ export default function RootLayout({
         <Navbar/>
         <Providers>
             {children}
-            <AddPostModal userInfo={userInfo}/>
+            {/* <AddPostModal userInfo={userInfo}/> */}
         </Providers>
       </body>
     </html>
