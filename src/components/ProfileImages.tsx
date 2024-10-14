@@ -4,7 +4,7 @@ import { useGetProfileUser, useUpdateCover, useUpdateProfile } from '@/hooks/pro
 import Image from 'next/image';
 import React, { ChangeEvent } from 'react';
 import fallbackImg from '../../images/default-fallback-image.png';
-import { useAppContext } from '@/contextApi';
+// import { useAppContext } from '@/contextApi';
 import { useGetFollow } from '@/hooks/follow.hook';
 import { CustomJwtPayload } from '@/jwtDecoder/jwtDecoder';
 
@@ -36,7 +36,7 @@ const ProfileImages = ({userInfo} : {userInfo: CustomJwtPayload}) => {
     const {data:getProfileData, refetch} = useGetProfileUser()
     const {mutate:updateCoverPhoto} = useUpdateCover(refetch);
     const {mutate:updateProfilePhoto} = useUpdateProfile(refetch);
-    const {setOpen} = useAppContext()
+    // const {setOpen} = useAppContext()
 
     const userData = getProfileData?.data;
 
@@ -120,7 +120,7 @@ const ProfileImages = ({userInfo} : {userInfo: CustomJwtPayload}) => {
                         }
                     </div>
                     <br />
-                    <p onClick={() => setOpen(true)} className='w-[130px] px-2 py-1 rounded-full bg-gray-400 font-bold cursor-pointer'><i className="uil uil-plus"></i> Create Post</p>
+                    {/* <p onClick={() => setOpen(true)} className='w-[130px] px-2 py-1 rounded-full bg-gray-400 font-bold cursor-pointer'><i className="uil uil-plus"></i> Create Post</p> */}
                     
                 </div>
             </section>
