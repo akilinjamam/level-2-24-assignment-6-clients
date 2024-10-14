@@ -5,8 +5,8 @@ import Navbar from "@/components/Navbar";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Providers from "@/libs/provider";
-import { cookies } from "next/headers";
-import { jwtDecoder } from "@/jwtDecoder/jwtDecoder";
+// import { cookies } from "next/headers";
+// import { jwtDecoder } from "@/jwtDecoder/jwtDecoder";
 // import AddPostModal from "@/components/modal/AddPostModal";
 
 const geistSans = localFont({
@@ -31,9 +31,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  const cookieStore = cookies();
-  const accessToken = cookieStore.get("accessToken")?.value as string;
-  const userInfo = jwtDecoder(accessToken);
+  // const cookieStore = cookies();
+  // const accessToken = cookieStore.get("accessToken")?.value as string;
+  // const userInfo = jwtDecoder(accessToken);
 
 
   return (

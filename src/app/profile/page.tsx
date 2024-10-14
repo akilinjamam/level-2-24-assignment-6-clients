@@ -2,7 +2,7 @@
 // import MyNewsFeeds from "@/components/newsFeeds/MyNewsFeeds";
 import ProfileImages from "@/components/ProfileImages";
 import { jwtDecoder } from "@/jwtDecoder/jwtDecoder";
-import { TPosts } from "@/types/posts.type";
+// import { TPosts } from "@/types/posts.type";
 import { cookies } from "next/headers";
 ;
 
