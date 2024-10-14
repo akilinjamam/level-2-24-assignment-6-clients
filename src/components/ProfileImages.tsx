@@ -4,15 +4,46 @@ import { useGetProfileUser, useUpdateCover, useUpdateProfile } from '@/hooks/pro
 import Image from 'next/image';
 import React, { ChangeEvent } from 'react';
 import fallbackImg from '../../images/default-fallback-image.png';
+import { useAppContext } from '@/contextApi';
+import { useGetFollow } from '@/hooks/follow.hook';
+import { CustomJwtPayload } from '@/jwtDecoder/jwtDecoder';
 
-const ProfileImages = () => {
+type followingIds = {
+    _id:string;
+    name: string;
+    profileImg:string;
+    createdAt:string;
+    updatedAt:string;
+}
+type followerIds = {
+    _id:string;
+    name: string;
+    profileImg:string;
+    createdAt:string;
+    updatedAt:string;
+}
+
+
+export type TFollow = {
+    id: followerIds;
+    follow: followingIds;
+};
+
+const ProfileImages = ({userInfo} : {userInfo: CustomJwtPayload}) => {
+
+    const {data} = useGetFollow()
 
     const {data:getProfileData, refetch} = useGetProfileUser()
     const {mutate:updateCoverPhoto} = useUpdateCover(refetch);
     const {mutate:updateProfilePhoto} = useUpdateProfile(refetch);
-
+    const {setOpen} = useAppContext()
 
     const userData = getProfileData?.data;
+
+    const findFollowingData = data?.data?.filter((f:TFollow) => f?.follow?._id === userInfo?.id) as TFollow[]
+
+    const findFollowerData = data?.data?.filter((f:TFollow) => f?.id?._id === userInfo?.id) as TFollow[]
+    console.log(findFollowingData)
 
     
     const handleCoverImageChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -55,7 +86,42 @@ const ProfileImages = () => {
             </section>
             <section className="w-full h-[300px] relative">
                 <div className='w-[95%] h-[200px] absolute bottom-0 left-[2.5%] p-2'>
-                <   p className='text-2xl font-bold'>{userData?.name}</p>
+                    <p className='text-2xl font-bold border-b-2 border-gray-500 py-2'>{userData?.name}</p>
+                    <br />
+                    
+                    <p className='text-1xl font-bold  text-blue-400'>Following: {findFollowingData?.length}</p>
+                    <br />
+                    <div className='flex flex-wrap'>
+                        {
+                            findFollowingData?.map((item:TFollow, index:number) => {
+                                return (
+                                    <div key={index+1} className='w-[100px] h-[140px] bg-blue-400 mr-2 rounded overflow-hidden relative p-1'>
+                                        <Image className='w-[100%] h-[100%] object-cover scale-150' width={200} height={200} src={item?.id?.profileImg || fallbackImg } alt='profile-img'/>
+                                        <p title={item?.id?.name} className='absolute bottom-4 left-3 text-white text-sm bg-blue-500 rounded p-1 '>{item?.id?.name?.length > 11 ? item?.id?.name?.slice(0,9) + '..' : item?.id?.name }</p>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
+                    <br />
+                    <br />
+                    <p className='text-1xl font-bold  text-blue-400'>Followers: {findFollowerData?.length}</p>
+                    <br />
+                    <div className='flex flex-wrap'>
+                        {
+                            findFollowerData?.map((item:TFollow, index:number) => {
+                                return (
+                                    <div key={index+1} className='w-[100px] h-[140px] bg-blue-400 mr-2 rounded overflow-hidden relative p-1'>
+                                        <Image className='w-[100%] h-[100%] object-cover scale-150' width={200} height={200} src={item?.follow?.profileImg || fallbackImg } alt='profile-img'/>
+                                        <p title={item?.follow?.name} className='absolute bottom-4 left-2 text-white text-sm'>{item?.follow?.name?.length > 11 ? item?.follow?.name?.slice(0,9) + '..' : item?.follow?.name }</p>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
+                    <br />
+                    <p onClick={() => setOpen(true)} className='w-[130px] px-2 py-1 rounded-full bg-gray-400 font-bold cursor-pointer'><i className="uil uil-plus"></i> Create Post</p>
+                    
                 </div>
             </section>
         </div>

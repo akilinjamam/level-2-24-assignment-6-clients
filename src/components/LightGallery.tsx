@@ -4,21 +4,18 @@ import fallbackImg from '../../images/default-fallback-image.png';
 import Image from 'next/image';
 import { TPosts } from '@/types/posts.type';
 import Link from 'next/link';
-
 import 'lightgallery/css/lightgallery.css';
 import 'lightgallery/css/lg-zoom.css';
 import 'lightgallery/css/lg-thumbnail.css';
-
 import lgThumbnail from 'lightgallery/plugins/thumbnail';
 import lgZoom from 'lightgallery/plugins/zoom';
 
 const LightGalleryImage = ({item} : {item:TPosts}) => {
-
     return (
         <div>
             <LightGallery elementClassNames='w-[100%] h-auto flex flex-wrap' speed={500} plugins={[lgThumbnail,lgZoom]}>
                 {
-                    item?.images?.slice(0,).map((image, index) => {
+                    item?.images?.slice(0,4).map((image, index) => {
                         
                         return (
                             
@@ -26,12 +23,11 @@ const LightGalleryImage = ({item} : {item:TPosts}) => {
                                     {
                                         item?.images?.length > 1 
                                         ?
-                                        <Image className='w-[455px] h-[350px]' width={455} height={455} src={image || fallbackImg} alt={`image-${index+1}`}/>
+                                        <Image className='w-[315px] h-[250px]' width={455} height={455} src={image || fallbackImg} alt={`image-${index+1}`}/>
                                         :
                                         <Image  width={1000} height={1000} src={image || fallbackImg} alt={`image-${index+1}`}/>
                                     }
-                                </Link>
-                           
+                                </Link>                          
                         )
                     })
                 }                             

@@ -5,7 +5,11 @@ import Image from 'next/image';
 import { ChangeEvent, useState } from 'react';
 import SimpleTextEditor from '../simpleTextEditor/SimpleTextEditor';
 import { useUploadPosts } from '@/hooks/posts.hook';
+
 const AddPost = ({userInfo} : {userInfo:CustomJwtPayload}) => {
+
+   
+
     const [value, setValue] = useState('');
     console.log(value)
     const [imagePreview, setImgPreview] = useState<string[] | []>([]);
@@ -66,41 +70,43 @@ const AddPost = ({userInfo} : {userInfo:CustomJwtPayload}) => {
             </div>
 
             <div className='w-full h-auto flex flex-wrap'>
-                        {
-                            imagePreview?.map((image,index) => {
-                                return (
-                                    <Image key={index+1} src={image} width={200} height={200} alt='preview-img'/>
-                                )
-                            })
-                        }
+                {
+                    imagePreview?.map((image,index) => {
+                        return (
+                            <Image key={index+1} src={image} width={200} height={200} alt='preview-img'/>
+                        )
+                    })
+                }
             </div>
             <br />
-            <form onSubmit={handlePost}>
-                        <select name="" id="" onChange={(e) => setCategory(e.target.value)}>
-                            <option value="Select Category">Select Category</option>
-                            <option value="Flower Gardening">Flower Gardening</option>
-                            <option value="Vegetable Gardening">Vegetable Gardening</option>
-                            <option value="Fruit Gardening">Fruit Gardening</option>
-                            <option value="Herb Gardening">Herb Gardening</option>
-                            <option value="Indoor Gardening">Indoor Gardening</option>
-                            <option value="Organic Gardening">Organic Gardening</option>
-                            <option value="Landscape Gardening">Landscape Gardening</option>
-                        </select>
-                        <br />
-                        <br />
-                        <input
-                            type="checkbox"
-                            checked={premium}  
-                            onChange={() => setPremium(!premium)}
-                        />
-                        <span className="ml-2">Premium</span>
-                        <br />
-                        <br />
-                        <input type="text" name="title" id="" placeholder='write you title'/>
-                        <br /><br />
-                        <SimpleTextEditor value={value} setValue={setValue}/>     
-                        <br />
-                        <input type="submit" value="Post" className="px-3 py-1 bg-blue-500 font-bold text-white cursor-pointer" />
+            <form className='text-sm' onSubmit={handlePost}>
+                <select name="" id="" onChange={(e) => setCategory(e.target.value)}>
+                    <option value="Select Category">Select Category</option>
+                    <option value="Flower Gardening">Flower Gardening</option>
+                    <option value="Vegetable Gardening">Vegetable Gardening</option>
+                    <option value="Fruit Gardening">Fruit Gardening</option>
+                    <option value="Herb Gardening">Herb Gardening</option>
+                    <option value="Indoor Gardening">Indoor Gardening</option>
+                    <option value="Organic Gardening">Organic Gardening</option>
+                    <option value="Landscape Gardening">Landscape Gardening</option>
+                </select>
+                <br />
+                <br />
+                <input
+                    type="checkbox"
+                        checked={premium}  
+                    onChange={() => setPremium(!premium)}
+                />
+                <span className="ml-2">Premium</span>
+                <br />
+                <br />
+                <input className='p-2' type="text" name="title" id="" placeholder='write you title'/>
+                <br /><br />
+                <SimpleTextEditor value={value} setValue={setValue}/>     
+                <br />
+                <input type="submit" value="Post" className="px-3 py-1 bg-blue-500 font-bold text-white cursor-pointer" />
+                <br />
+                <br />
             </form>
         </div>
     );

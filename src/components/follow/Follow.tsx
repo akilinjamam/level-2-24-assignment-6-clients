@@ -48,14 +48,24 @@ const Follow = ({myId, followingId} : {myId:string, followingId: string}) => {
     }
 
     
-    const findFollow = data?.data?.find((f:TFollower) => f?.id?._id === followingId) as TFollower;
+    const findFollowings = data?.data?.filter((f:TFollower) => f?.id?._id === followingId) as TFollower[];
+
+    const findMyIdFromFollower = findFollowings?.find((f:TFollower) => f?.follow?._id === id)
+
     
-    // console.log(findFollow?.follow?._id);
+    
+    console.log(findMyIdFromFollower);
 
     return (
-        <div   className="bg-gray-300 px-2 py-1 font-bold text-blue-500 cursor-pointer">
-            <i className="uil uil-plus"></i>
-            <span>{(findFollow?.follow?._id === id) ? <span onClick={handleUnfollow}>Unfollow</span> : <span onClick={handleFollow}>Follow</span> }</span>
+        <div>
+            {
+                followingId !== id 
+                &&
+                <div className="bg-gray-300 px-2 py-1 font-bold text-blue-500 cursor-pointer">
+                    <i className="uil uil-plus"></i>
+                    <span>{(findMyIdFromFollower?.id?._id === followingId) ? <span onClick={handleUnfollow}>Unfollow</span> : <span onClick={handleFollow}>Follow</span> }</span>
+                </div>
+            }
         </div>
     );
 };

@@ -43,7 +43,7 @@ const Navbar = () => {
                 }} className="w-[40px] h-[40px] bg-gray-200 rounded-full cursor-pointer">
 
                 </div>
-                <div className={`w-[200px] h-auto bg-gray-100 top-[60px] right-0 ${hide ? 'hidden' : 'absolute'} p-2 text-sm`}>
+                <div className={`w-[200px] h-auto bg-gray-100 top-[60px] right-0 ${hide ? 'hidden' : 'absolute z-30'} p-2 text-sm`}>
                     <ul >
                         {
                             homeRoutes?.slice(4)?.map((item: THomeRoutes, index:number) => {
