@@ -6,6 +6,7 @@ import Image from "next/image";
 import Follow from "../follow/Follow";
 import LightGalleryImage from "../LightGallery";
 import fallbackImg from './../../../images/default-fallback-image.png';
+import UpAndDownVote from "../upAndDownVote/UpAndDownVote";
 
 const MyNewsFeeds = ({data, accessToken}: {data:any, accessToken:string}) => {
     return (
@@ -44,14 +45,7 @@ const MyNewsFeeds = ({data, accessToken}: {data:any, accessToken:string}) => {
                         </div>
                         <br />
 
-                        <div className="w-full h-[30px] px-1 flex items-center justify-between font-bold text-blue-500">
-                            <div className="bg-gray-300 w-[49.5%] h-[30px] flex items-center justify-center">
-                                <p>Up Vote</p>
-                            </div>
-                            <div className="bg-gray-300 w-[50%] h-[30px] flex items-center justify-center">
-                                <p>Down Vote</p>
-                            </div>
-                        </div>
+                        <UpAndDownVote accessToken={accessToken} postId={item?._id}/>
                     </div>
                 ))}
             </div>
