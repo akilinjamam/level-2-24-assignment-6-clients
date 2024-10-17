@@ -4,8 +4,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { homeRoutes, THomeRoutes } from "./homeRoutes";
 import { useState } from "react";
+import { useGetProfileUser } from "@/hooks/profile.hook";
+import Image from "next/image";
+import fallbackImg from '../../images/default-fallback-image.png';
 
 const Navbar = () => {
+
+    const {data:getProfilePicture} = useGetProfileUser();
+    const userData = getProfilePicture?.data;
 
     const [inputValue, setInputValue] = useState('');
     
@@ -53,11 +59,14 @@ const Navbar = () => {
                 <div onClick={(e) => {
                     setHide(!hide)
                     e.stopPropagation()
-                }} className="w-[40px] h-[40px] bg-gray-200 rounded-full cursor-pointer">
-
+                }} className="w-[40px] h-[40px] bg-gray-200 rounded-full cursor-pointer overflow-hidden">
+                    <Image className="object-cover scale-150 mt-1" style={{width:'50px', height:'40px'}} width={500} height={500} priority src={userData?.coverImg === 'add profile img' ? fallbackImg : userData?.coverImg || fallbackImg}  alt='cover-image'/>
                 </div>
                 <div className={`w-[200px] h-auto bg-gray-100 top-[60px] right-0 ${hide ? 'hidden' : 'absolute z-30'} p-2 text-sm`}>
                     <ul >
+                        <p className="font-bold">{userData?.name}</p>
+                        <hr />
+                        <br />
                         {
                             homeRoutes?.slice(4)?.map((item: THomeRoutes, index:number) => {
                                 const active = (linkValue: string) => {
@@ -77,6 +86,9 @@ const Navbar = () => {
                 </div>
                 <div className={`w-[200px] h-auto bg-gray-100 top-[60px] right-0 ${hide ? 'hidden' : 'xsm:absolute sm:absolute md:hidden lg:hidden'} p-2 text-sm`}>
                     <ul >
+                    <p className="font-bold">{userData?.name}</p>
+                        <hr />
+                        <br />
                         {
                             homeRoutes?.map((item: THomeRoutes, index:number) => {
                                 const active = (linkValue: string) => {

@@ -1,17 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use server"
 import MyNewsFeeds from "@/components/newsFeeds/MyNewsFeeds";
-import ProfileImg from "@/components/ProfileImg";
-import { jwtDecoder } from "@/jwtDecoder/jwtDecoder";
+// import MyNewsFeeds from "@/components/newsFeeds/MyNewsFeeds";
+// import ProfileImg from "@/components/ProfileImg";
+import ProfileImgWithId from "@/components/ProfileImgWithId";
+// import { jwtDecoder } from "@/jwtDecoder/jwtDecoder";
 import { TPosts } from "@/types/posts.type";
 import { cookies } from "next/headers";
 ;
 
-const Profile = async () => {
+const ProfileWithId = async ({params}: {params:any}) => {
+
+    const profileId = params?.pageId;
+    
 
     const cookieStore = cookies();
     const accessToken = cookieStore.get("accessToken")?.value as string;
-    const userInfo = jwtDecoder(accessToken);
+    // const userInfo = jwtDecoder(accessToken);
 
     const getPosts = async () => {
         const url = `${process.env.NEXT_PUBLIC_BASE_API}/api/posts/`;
@@ -43,18 +48,19 @@ const Profile = async () => {
     const myPosts = data?.data;
     
 
-    const findMyPosts = myPosts?.filter((f:TPosts) => f?.userId?._id === userInfo?.id)
+    const findMyPosts = myPosts?.filter((f:TPosts) => f?.userId?._id === profileId)
     
 
     console.log(findMyPosts)
+    console.log(profileId)
 
     return (
         <div>
-            <ProfileImg userInfo={userInfo}/>
+            <ProfileImgWithId userInfo={profileId} myToken={accessToken}/>
             <MyNewsFeeds data={findMyPosts} accessToken={accessToken}/>
             
         </div>
     );
 };
 
-export default Profile;
+export default ProfileWithId;

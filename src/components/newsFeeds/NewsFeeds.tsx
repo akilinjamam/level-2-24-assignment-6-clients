@@ -2,13 +2,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { TPosts } from "@/types/posts.type";
-import Image from "next/image";
 import Follow from "../follow/Follow";
 import LightGalleryImage from "../LightGallery";
-import fallbackImg from './../../../images/default-fallback-image.png';
+
 import UpAndDownVote from "../upAndDownVote/UpAndDownVote";
 import Comments from "../comments/Comments";
 import Favourite from "../favourite/Favourite";
+import NewsFeedsProfile from "../newFeedsProfile/NewsFeedsProfile";
 
 const NewsFeeds = ({data, accessToken}: {data:any, accessToken:string}) => {
     return (
@@ -17,14 +17,7 @@ const NewsFeeds = ({data, accessToken}: {data:any, accessToken:string}) => {
                 {data?.data?.map((item: TPosts, index: number) => (
                     <div className="bg-gray-200 mb-3" key={index + 1}>
                         <div className="w-full h-[50px] flex items-center justify-between px-2">
-                            <div className="w-auto flex items-center font-bold">
-                                <div className="w-[35px] h-[35px] rounded-full bg-gray-300 overflow-hidden">
-                                    <Image className="scale-125 mt-2" width={200} height={200} src={item?.userId?.profileImg || fallbackImg} alt="" />
-                                </div>
-                                <div className="ml-3">
-                                    <p>{item?.name}</p>
-                                </div>
-                            </div>
+                            <NewsFeedsProfile item={item} token={accessToken} />
                             <Follow myId={accessToken} followingId={item?.userId?._id}/>
                         </div>
 

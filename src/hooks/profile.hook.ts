@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
+  getOtherProfileUser,
   getProfileUser,
   updateCoverPhoto,
   updateProfilePhoto,
@@ -12,6 +13,12 @@ export const useGetProfileUser = () => {
   return useQuery({
     queryKey: ["USERCOVERPHOTO"],
     queryFn: async () => await getProfileUser(),
+  });
+};
+export const useGetOtherProfileUser = (userInfo: FieldValues) => {
+  return useQuery({
+    queryKey: ["OTHERUSERPROFILE"],
+    queryFn: async () => await getOtherProfileUser(userInfo),
   });
 };
 

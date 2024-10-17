@@ -67,3 +67,19 @@ export const getProfileUser = async () => {
     }
   }
 };
+export const getOtherProfileUser = async (id: FieldValues) => {
+  try {
+    const { data } = await axiosInstance.get(`/api/auth/get-other-user/${id}`);
+    return data;
+  } catch (error: any) {
+    if (error.response) {
+      const errorMessage =
+        error.response.data?.message || "profile update failed.";
+      throw new Error(errorMessage);
+    } else {
+      throw new Error(
+        error.message || "An unknown error occurred during registration."
+      );
+    }
+  }
+};

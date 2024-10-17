@@ -45,8 +45,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased p-2`}
       >
         <ToastContainer position="bottom-right"/>
-        <Navbar/>
         <Providers>
+        <Navbar/>
             {children}
             {/* <AddPostModal userInfo={userInfo}/> */}
         </Providers>

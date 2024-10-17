@@ -1,14 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-"use server"
 import MyNewsFeeds from "@/components/newsFeeds/MyNewsFeeds";
 import ProfileImg from "@/components/ProfileImg";
 import { jwtDecoder } from "@/jwtDecoder/jwtDecoder";
 import { TPosts } from "@/types/posts.type";
 import { cookies } from "next/headers";
-;
 
-const Profile = async () => {
-
+const MyProfile = async () => {
     const cookieStore = cookies();
     const accessToken = cookieStore.get("accessToken")?.value as string;
     const userInfo = jwtDecoder(accessToken);
@@ -47,14 +43,12 @@ const Profile = async () => {
     
 
     console.log(findMyPosts)
-
     return (
         <div>
             <ProfileImg userInfo={userInfo}/>
             <MyNewsFeeds data={findMyPosts} accessToken={accessToken}/>
-            
         </div>
     );
 };
 
-export default Profile;
+export default MyProfile;

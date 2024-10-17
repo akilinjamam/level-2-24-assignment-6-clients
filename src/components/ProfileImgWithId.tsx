@@ -1,14 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import '../app/globals.css';
-import { useGetProfileUser, useUpdateCover, useUpdateProfile } from '@/hooks/profile.hook';
+import { useGetOtherProfileUser} from '@/hooks/profile.hook';
 import Image from 'next/image';
-import React, { ChangeEvent } from 'react';
 import fallbackImg from '../../images/default-fallback-image.png';
 // import { useAppContext } from '@/contextApi';
 import { useGetFollow } from '@/hooks/follow.hook';
-import { CustomJwtPayload } from '@/jwtDecoder/jwtDecoder';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { jwtDecoder } from '@/jwtDecoder/jwtDecoder';
+
 
 type followingIds = {
     _id:string;
@@ -32,51 +32,33 @@ export type TFollow = {
 };
 
 
-const ProfileImg = ({userInfo} : {userInfo: CustomJwtPayload}) => {
-    const router = useRouter();
+const ProfileImgWithId = ({userInfo, myToken} : {userInfo: any, myToken:string}) => {
+
+    const router = useRouter()
+
     const {data} = useGetFollow()
-    // const [favorite, setFavourite] = useState(false);
-    const {data:getProfileData, refetch} = useGetProfileUser()
-    const {mutate:updateCoverPhoto} = useUpdateCover(refetch);
-    const {mutate:updateProfilePhoto} = useUpdateProfile(refetch);
-    // const {setOpen} = useAppContext()
+   
+    const {data:getProfileData} = useGetOtherProfileUser(userInfo)
+    console.log(userInfo)
+    
+    const getId = jwtDecoder(myToken);
+    const myId = getId?.id
 
     const userData = getProfileData?.data;
 
-    const findFollowingData = data?.data?.filter((f:TFollow) => f?.follow?._id === userInfo?.id) as TFollow[]
+    const findFollowingData = data?.data?.filter((f:TFollow) => f?.follow?._id === userInfo.toString()) as TFollow[]
 
-    const findFollowerData = data?.data?.filter((f:TFollow) => f?.id?._id === userInfo?.id) as TFollow[]
-    console.log(findFollowingData)
-
+    const findFollowerData = data?.data?.filter((f:TFollow) => f?.id?._id === userInfo.toString()) as TFollow[]
     
-    const handleCoverImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const file = e.target.files![0] as any;
-        const formData = new FormData();
-        formData.append('coverImg', file);
-
-        updateCoverPhoto(formData)
-
-      };
-    const handleProfileImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const file = e.target.files![0] as any;
-        const formData = new FormData();
-        formData.append('profileImg', file);
-
-        updateProfilePhoto(formData)
-
-      };
-
-
     const handleNavigate = (otherProfileId:string) => {
-        if(userInfo?.id === otherProfileId){
+        console.log(otherProfileId)
+        console.log(userInfo)
+        if(myId === otherProfileId){
             router.push('/profile')
         }else{
             router.push(`/profile/${otherProfileId}`)
         }
     }
-
 
     return (
         <div className="w-[50%] bg-gray-200 mx-auto auto my-2 h-auto">
@@ -86,15 +68,9 @@ const ProfileImg = ({userInfo} : {userInfo: CustomJwtPayload}) => {
                 </div>
                 <div className="w-[300px] h-[300px] rounded-full bg-gray-300 absolute left-[20px] bottom-[-70px] viewWithHover z-10 overflow-hidden ">
                     <Image className='absolute inset-x-10 inset-y-12 w-full h-full object-cover scale-150 ' style={{width:'100%', height:'auto'}} width={300} height={300} priority src={userData?.profileImg === ('add profile img') ? (fallbackImg) : userData?.profileImg || fallbackImg}  alt='profile-image'/>
-                    <label  htmlFor="image">
-                        <i className="uil uil-pen absolute bottom-[70px] right-[30px] hide cursor-pointer bg-gray-200 px-2 rounded-full text-blue-500"></i>
-                    </label>
-                    <input onChange={handleProfileImageChange} className='hidden' type="file" name="" id="image" />
+                    
                 </div>
-                <label htmlFor="coverImg">
-                    <i className="uil uil-pen absolute bottom-[20px] right-[20px] cursor-pointer text-blue-500 bg-gray-200 px-2 hover:bg-gray-300 rounded-full"></i>
-                </label>
-                <input onChange={handleCoverImageChange} className='hidden' type="file" name="" id="coverImg" />
+                
             </section>
             <section className='w-full mx-auto bg-green h-auto'>
                 <div className='w-[95%] h-auto mt-[100px] mx-auto'>
@@ -123,7 +99,7 @@ const ProfileImg = ({userInfo} : {userInfo: CustomJwtPayload}) => {
                         {
                             findFollowerData?.map((item:TFollow, index:number) => {
                                 return (
-                                    <div  onClick={() =>handleNavigate(item?.follow?._id)} key={index+1} className='w-[100px] h-[140px] bg-blue-400 mr-2 rounded overflow-hidden relative p-1 cursor-pointer'>
+                                    <div onClick={() =>handleNavigate(item?.follow?._id)} key={index+1} className='w-[100px] h-[140px] bg-blue-400 mr-2 rounded overflow-hidden relative p-1 cursor-pointer'>
                                         <Image className='w-[100%] h-[100%] object-cover scale-150' width={200} height={200} src={item?.follow?.profileImg || fallbackImg } alt='profile-img'/>
                                         <p title={item?.follow?.name} className='absolute bottom-4 left-1 bg-blue-500 p-1 rounded  text-white text-sm'>{item?.follow?.name?.length > 11 ? item?.follow?.name?.slice(0,9) + '..' : item?.follow?.name }</p>
                                     </div>
@@ -132,13 +108,6 @@ const ProfileImg = ({userInfo} : {userInfo: CustomJwtPayload}) => {
                         }
                     </div>
                     <br />
-                    {/* <p onClick={() => setOpen(true)} className='w-[130px] px-2 py-1 rounded-full bg-gray-400 font-bold cursor-pointer'><i className="uil uil-plus"></i> Create Post</p> */}
-                    <Link href={`/profile`}>
-                        <button className='text-white font-bold px-2 py-1 bg-blue-500 rounded mr-2'>Your Posts</button>
-                    </Link>
-                    <Link href={`/profileForFavPosts`}>
-                        <button className='text-white font-bold px-2 py-1 bg-blue-500 rounded'>Favourite Posts</button>
-                    </Link>
                     <br /><br />
                 </div>
             </section>
@@ -146,4 +115,4 @@ const ProfileImg = ({userInfo} : {userInfo: CustomJwtPayload}) => {
     );
 };
 
-export default ProfileImg;
+export default ProfileImgWithId;
