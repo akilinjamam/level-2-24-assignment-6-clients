@@ -123,10 +123,10 @@ const ProfileImg = ({userInfo} : {userInfo: CustomJwtPayload}) => {
                     </div>
                     <br />
                     {/* <p onClick={() => setOpen(true)} className='w-[130px] px-2 py-1 rounded-full bg-gray-400 font-bold cursor-pointer'><i className="uil uil-plus"></i> Create Post</p> */}
-                    <Link href={`/profile?favourite=${false}`}>
+                    <Link href={`/profile`}>
                         <button className='text-white font-bold px-2 py-1 bg-blue-500 rounded mr-2'>Your Posts</button>
                     </Link>
-                    <Link href={`/profile?favourite=${true}`}>
+                    <Link href={`/profileForFavPosts`}>
                         <button className='text-white font-bold px-2 py-1 bg-blue-500 rounded'>Favourite Posts</button>
                     </Link>
                     <br /><br />
