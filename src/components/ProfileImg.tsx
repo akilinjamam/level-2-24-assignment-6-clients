@@ -100,8 +100,15 @@ const ProfileImg = ({userInfo} : {userInfo: CustomJwtPayload}) => {
                     <input onChange={handleCoverImageChange} className='hidden' type="file" name="" id="coverImg" />
                 </section>
                 <section className='w-full mx-auto bg-green h-auto'>
-                    <div className='w-[95%] h-auto mt-[100px] mx-auto'>
-                        <p className='text-2xl font-bold border-b-2 border-gray-500 py-3'>{userData?.name}</p>
+                    <div className='w-[95%] h-auto mt-[100px] mx-auto  py-3'>
+                        <div className='w-full h-[50px] py-2 flex items-center justify-between'>
+                            <p className='text-2xl font-bold border-b-2 '>{userData?.name}
+                            </p>
+                            <div>
+                                <p className='px-2 py-1 bg-blue-500 rounded text-white font-bold'>verify profile</p>
+                            </div>
+                        </div>
+                        <hr />
                         <br />
                         
                         <p className='text-1xl font-bold  text-blue-400'>Following: {findFollowingData?.length}</p>

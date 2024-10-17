@@ -111,7 +111,7 @@ const RecoveryPassword = () => {
                     <br />
                     <form onSubmit={handleSubmit(onSubmit)}>
                         
-                        <input value={`opticalsoft21@gmail.com`} style={{background:'none',borderBottom:'1px solid lightgray'}} className='mb-3 w-[80%] ' type="email" {...register("email")} placeholder='type your email' />
+                        <input value={email} style={{background:'none',borderBottom:'1px solid lightgray'}} className='mb-3 w-[80%] ' type="email" {...register("email")} placeholder='type your email' />
                         {errors.email && <span>This field is required</span>}
                         <br />
                         <input style={{background:'none',borderBottom:'1px solid lightgray'}} className='mb-3 w-[80%] ' type="password"  {...register("password")} placeholder='type password' />
