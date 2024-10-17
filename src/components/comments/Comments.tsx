@@ -1,13 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import { useState } from "react";
 import SimpleTextEditor from "../simpleTextEditor/SimpleTextEditor";
-import { useGetComments, usePostComments } from "@/hooks/comments.hook";
+import { useDeleteCommments, useEditComments, useGetComments, usePostComments } from "@/hooks/comments.hook";
 import { TPosts, TUser } from "@/types/posts.type";
 import { jwtDecoder } from "@/jwtDecoder/jwtDecoder";
 import Image from "next/image";
 import fallbackPhoto from '../../../images/default-fallback-image.png';
 
 export type TComments = {
+    _id:string;
     postId:TPosts;
     commenterId: TUser;
     comment: string;
@@ -16,12 +18,16 @@ export type TComments = {
 const Comments = ({postId, commenterId}: {postId:string, commenterId:string}) => {
     const [hide, setHide] = useState(true);
     const [value, setValue] = useState('');
+    const [viewUpdateButton, setViewUpdateButton] = useState(false);
+    const [commentId, setCommentId] = useState('');
 
     const getId = jwtDecoder(commenterId);
     const id = getId.id;
 
     const {data:allComments, refetch} = useGetComments()
-    const {mutate:createComments, error} = usePostComments(refetch);
+    const {mutate:createComments} = usePostComments(refetch);
+    const {mutate:editComment} = useEditComments(refetch, setValue);
+    const {mutate:deleteComment, error} = useDeleteCommments(refetch);
     console.log(error);
 
     const filterCommentsAccordingToPosts = allComments?.data?.filter((f:TComments) => f?.postId?._id === postId)
@@ -34,6 +40,28 @@ const Comments = ({postId, commenterId}: {postId:string, commenterId:string}) =>
         }
         console.log(data)
         createComments(data);
+    }
+
+    const handleUpdateComment = (userComment:string, idOfComment:string) => {
+        setViewUpdateButton(true)
+        setValue(userComment)
+        setCommentId(idOfComment)
+    }
+    console.log(commentId)
+    const submitUpdate = () => {
+        const updatedData = {
+            id:commentId,
+            data: {
+                comment:value
+            }
+        }
+        console.log(updatedData)
+        editComment(updatedData)
+        setViewUpdateButton(false)
+    }
+
+    const handleDeleteComment = (deleteId:any) => {
+        deleteComment(deleteId)
     }
 
 
@@ -53,7 +81,17 @@ const Comments = ({postId, commenterId}: {postId:string, commenterId:string}) =>
                                 <div className="mb-4" key={index+1}>
                                     <span className="font-bold text-sm flex items-center">
                                         <Image width={30} height={30} src={item?.commenterId?.profileImg || fallbackPhoto} alt='profile-pic'/>
-                                        <p className="ml-2">{item?.commenterId?.name}</p>
+                                        <p className="ml-2">
+                                            {item?.commenterId?.name} 
+                                            {
+                                                item?.commenterId?._id === id
+                                                &&
+                                                <span>
+                                                    <i onClick={() =>handleUpdateComment(item?.comment, item?._id)} className="uil uil-pen ml-3 cursor-pointer"></i> 
+                                                    <i  onClick={() =>handleDeleteComment(item?._id)} className="uil uil-trash-alt ml-1 cursor-pointer"></i>
+                                                </span>
+                                            }
+                                        </p>
                                     </span>
                                     <hr />
                                     <p className="text-sm" dangerouslySetInnerHTML={{__html:item?.comment}}></p>
@@ -68,7 +106,23 @@ const Comments = ({postId, commenterId}: {postId:string, commenterId:string}) =>
                         <SimpleTextEditor setValue={setValue} value={value}/>
                     </div>
                     <div className="w-full h-[60px] flex items-center justify-end">
-                        <button onClick={handleComment} className="bg-blue-500 px-3 py-1 font-bold text-white cursor-pointer">Post</button>
+                        {
+                            !viewUpdateButton
+                            &&
+                            <button onClick={handleComment} className="bg-blue-500 px-3 py-1 font-bold text-white cursor-pointer">Post</button>
+                        }
+
+                        {
+                            viewUpdateButton
+                            &&
+                            <div>
+                                <button onClick={submitUpdate} className="bg-blue-500 px-3 py-1 font-bold text-white cursor-pointer">Update</button>
+                                <button onClick={() => {
+                                    setValue('')
+                                    setViewUpdateButton(false)
+                                }} className="bg-red-500 px-3 py-1 font-bold text-white cursor-pointer ml-2">Cancel</button>
+                            </div>
+                        }
                     </div>
                 </div>
                 

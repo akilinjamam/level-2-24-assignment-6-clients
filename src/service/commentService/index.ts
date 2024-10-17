@@ -40,7 +40,7 @@ export const createComment = async (userData: FieldValues) => {
 
 export const updateComment = async (userData: FieldValues, id: string) => {
   try {
-    const { data } = await axiosInstance.post(`/api/comment/${id}`, userData);
+    const { data } = await axiosInstance.patch(`/api/comment/${id}`, userData);
     return data;
   } catch (error: any) {
     if (error.response) {
@@ -55,7 +55,7 @@ export const updateComment = async (userData: FieldValues, id: string) => {
 };
 export const deleteComment = async (id: FieldValues) => {
   try {
-    const { data } = await axiosInstance.post(`/api/comment/${id}`);
+    const { data } = await axiosInstance.delete(`/api/comment/${id}`);
     return data;
   } catch (error: any) {
     if (error.response) {

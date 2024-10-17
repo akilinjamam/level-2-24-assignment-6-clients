@@ -27,12 +27,13 @@ export const usePostComments = (refetch: any) => {
   });
 };
 
-export const useEditComments = (refetch: any) => {
+export const useEditComments = (refetch: any, setValue: any) => {
   return useMutation<any, Error, FieldValues>({
     mutationKey: ["USEREDITCOMMENTS"],
     mutationFn: async (data) => await updateComment(data?.data, data?.id),
     onSuccess: () => {
       refetch();
+      setValue("");
       toast.success("success");
     },
     onError: (error) => {
