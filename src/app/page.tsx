@@ -3,13 +3,17 @@ import { cookies } from "next/headers";
 
 import NewsFeeds from "@/components/newsFeeds/NewsFeeds";
 
-const Home = async () => {
+const Home = async ({searchParams}: { searchParams: { [key: string]: string | string[] | undefined } }) => {
+
+    const searchTerm = searchParams?.searchTerm
+    const decodedSearchTerm = searchTerm ? decodeURIComponent(searchTerm as string) : '';
+    console.log('decode:',decodedSearchTerm)
 
     const cookieStore = cookies();
     const accessToken = cookieStore.get("accessToken")?.value as string;
 
     const getPosts = async () => {
-        const url = `${process.env.NEXT_PUBLIC_BASE_API}/api/posts/`;
+        const url = `${process.env.NEXT_PUBLIC_BASE_API}/api/posts?searchTerm=${decodedSearchTerm}`;
 
         try {
             const response = await fetch(url, {

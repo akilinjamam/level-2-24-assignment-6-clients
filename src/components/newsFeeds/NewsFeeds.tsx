@@ -12,8 +12,8 @@ import Favourite from "../favourite/Favourite";
 
 const NewsFeeds = ({data, accessToken}: {data:any, accessToken:string}) => {
     return (
-        <div className="w-full min-h-[1200px] my-2">
-            <div className="w-[50%] min-h-[1200px] bg-gray-100 mx-auto p-2">
+        <div className="w-full min-h-auto my-2">
+            <div className="w-[50%] min-h-auto bg-gray-100 mx-auto p-2">
                 {data?.data?.map((item: TPosts, index: number) => (
                     <div className="bg-gray-200 mb-3" key={index + 1}>
                         <div className="w-full h-[50px] flex items-center justify-between px-2">
@@ -31,6 +31,12 @@ const NewsFeeds = ({data, accessToken}: {data:any, accessToken:string}) => {
                         {/* Image section */}
                         <div className="w-full h-auto">
                             <LightGalleryImage item={item} />
+                        </div>
+                        <br />
+
+                        {/* category */}
+                        <div className="w-full ml-1 text-xl text-green-500">
+                            <p className="font-bold">Category: {item?.category}</p>
                         </div>
                         <br />
 
