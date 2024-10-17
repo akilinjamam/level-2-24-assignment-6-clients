@@ -7,6 +7,7 @@ import fallbackImg from '../../images/default-fallback-image.png';
 // import { useAppContext } from '@/contextApi';
 import { useGetFollow } from '@/hooks/follow.hook';
 import { CustomJwtPayload } from '@/jwtDecoder/jwtDecoder';
+import Link from 'next/link';
 
 type followingIds = {
     _id:string;
@@ -33,7 +34,7 @@ export type TFollow = {
 const ProfileImg = ({userInfo} : {userInfo: CustomJwtPayload}) => {
 
     const {data} = useGetFollow()
-
+    // const [favorite, setFavourite] = useState(false);
     const {data:getProfileData, refetch} = useGetProfileUser()
     const {mutate:updateCoverPhoto} = useUpdateCover(refetch);
     const {mutate:updateProfilePhoto} = useUpdateProfile(refetch);
@@ -122,6 +123,13 @@ const ProfileImg = ({userInfo} : {userInfo: CustomJwtPayload}) => {
                     </div>
                     <br />
                     {/* <p onClick={() => setOpen(true)} className='w-[130px] px-2 py-1 rounded-full bg-gray-400 font-bold cursor-pointer'><i className="uil uil-plus"></i> Create Post</p> */}
+                    <Link href={`/profile?favourite=${false}`}>
+                        <button className='text-white font-bold px-2 py-1 bg-blue-500 rounded mr-2'>Your Posts</button>
+                    </Link>
+                    <Link href={`/profile?favourite=${true}`}>
+                        <button className='text-white font-bold px-2 py-1 bg-blue-500 rounded'>Favourite Posts</button>
+                    </Link>
+                    <br /><br />
                 </div>
             </section>
         </div>

@@ -7,6 +7,8 @@ import Follow from "../follow/Follow";
 import LightGalleryImage from "../LightGallery";
 import fallbackImg from './../../../images/default-fallback-image.png';
 import UpAndDownVote from "../upAndDownVote/UpAndDownVote";
+import Favourite from "../favourite/Favourite";
+import Comments from "../comments/Comments";
 
 const MyNewsFeeds = ({data, accessToken}: {data:any, accessToken:string}) => {
     return (
@@ -46,6 +48,8 @@ const MyNewsFeeds = ({data, accessToken}: {data:any, accessToken:string}) => {
                         <br />
 
                         <UpAndDownVote accessToken={accessToken} postId={item?._id}/>
+                        <Favourite postId={item?._id} accessToken={accessToken}/>
+                        <Comments commenterId={accessToken} postId={item?._id}/>
                     </div>
                 ))}
             </div>
