@@ -9,6 +9,7 @@ import fallbackImg from './../../../images/default-fallback-image.png';
 import UpAndDownVote from "../upAndDownVote/UpAndDownVote";
 
 import Comments from "../comments/Comments";
+import Other from "../other/Other";
 
 const MyNewsFeeds = ({data, accessToken}: {data:any, accessToken:string}) => {
     return (
@@ -50,6 +51,7 @@ const MyNewsFeeds = ({data, accessToken}: {data:any, accessToken:string}) => {
                         <UpAndDownVote accessToken={accessToken} postId={item?._id}/>
                         
                         <Comments commenterId={accessToken} postId={item?._id}/>
+                        <Other postId={item?._id}/>
                     </div>
                 ))}
             </div>

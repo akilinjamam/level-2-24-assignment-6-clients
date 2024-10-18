@@ -4,6 +4,7 @@ import MyNewsFeeds from "@/components/newsFeeds/MyNewsFeeds";
 import ProfileImg from "@/components/ProfileImg";
 import { jwtDecoder } from "@/jwtDecoder/jwtDecoder";
 import { TPosts } from "@/types/posts.type";
+import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 ;
 
@@ -24,7 +25,10 @@ const Profile = async () => {
                     'Authorization': `${accessToken}`,
                 },
                 cache: 'no-store',
+                
             });
+
+            revalidateTag("posts")
 
             if (!response.ok) {
                 throw new Error(`Error: ${response.status}`);

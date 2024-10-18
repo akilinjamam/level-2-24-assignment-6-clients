@@ -21,6 +21,10 @@ const NavItems = ({userInfo}: {userInfo:CustomJwtPayload}) => {
    const [hide, setHide] = useState(true);
 
     const pathName = usePathname();
+
+    const activeDash = (linkValue: string) => {
+        return (pathName === linkValue) ? 'text-blue-500 font-bold' : '' 
+       }
   
     return (
         <div onClick={() => {
@@ -41,7 +45,7 @@ const NavItems = ({userInfo}: {userInfo:CustomJwtPayload}) => {
                     </button>
                 </Link>
             </div>
-           <div className="w-[50%] xsm:hidden md:flex  h-full lg:flex lg:items-center lg:justify-around">
+           <div className="w-[50%] xsm:hidden sm:hidden md:flex  h-full lg:flex lg:items-center lg:justify-around">
                 {
                     homeRoutes?.slice(0,4)?.map((item: THomeRoutes, index: number) => {
                        const active = (linkValue: string) => {
@@ -64,7 +68,7 @@ const NavItems = ({userInfo}: {userInfo:CustomJwtPayload}) => {
                 }} className="w-[40px] h-[40px] bg-gray-200 rounded-full cursor-pointer overflow-hidden">
                     <Image className="object-cover scale-150 mt-1" style={{width:'50px', height:'40px'}} width={500} height={500} priority src={userData?.coverImg === 'add profile img' ? fallbackImg : userData?.coverImg || fallbackImg}  alt='cover-image'/>
                 </div>
-                <div className={`w-[200px] h-auto bg-gray-100 top-[60px] right-0 ${hide ? 'hidden' : 'absolute z-30'} p-2 text-sm`}>
+                <div className={`w-[200px] h-auto bg-gray-100 top-[60px] right-0 ${hide ? 'hidden' : 'absolute'} p-2 text-sm`}>
                     <ul >
                         <p className="font-bold">{userData?.name}</p>
                         <hr />
@@ -83,6 +87,16 @@ const NavItems = ({userInfo}: {userInfo:CustomJwtPayload}) => {
                                 )
                             })
                         }
+                        <Link onClick={(e) => e.stopPropagation()} href="/userDashboard">
+                            <li className={`mb-2 ${activeDash('/userDashboard')}`}>
+                                <i className='uil uil-create-dashboard'></i> User Dashboard
+                            </li>
+                        </Link>
+                        <Link onClick={(e) => e.stopPropagation()} href="/adminDashboard">
+                            <li className={`mb-2 ${activeDash('/adminDashboard')}`}>
+                                <i className='uil uil-dashboard'></i> Admin Dashboard
+                            </li>
+                        </Link>
                     </ul>
    
                 </div>

@@ -20,4 +20,5 @@ export type TPosts = {
   description: string;
   images: string[];
   category: string;
+  premium: boolean;
 };

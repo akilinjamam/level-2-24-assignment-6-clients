@@ -1,8 +1,8 @@
 "use server";
 
 import { cookies } from "next/headers";
-import NavItems from "./navItems/NavItems";
 import { jwtDecoder } from "@/jwtDecoder/jwtDecoder";
+import NavItems from "./navItems/NavItems";
 
 const Navbar = () => {
 
