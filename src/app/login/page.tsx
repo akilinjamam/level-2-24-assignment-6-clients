@@ -94,6 +94,9 @@ const Login = () => {
                 <div className="lg:w-[50%] md:w-[50%] sm:w-full xsm:w-full h-[100%] bg-gray-100">
 
                 <section className="px-5 py-5 h-full relative">
+                    <div className="w-full h-[40px] flex items-center justify-end">
+                        <Link className="text-blue-500" href='/registration'>Registration</Link>
+                    </div>
                     <p  className="text-gray-700 text-3xl font-bold my-6">Login Form:</p>
                     <hr />
                     <br />

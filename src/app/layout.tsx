@@ -1,4 +1,3 @@
-
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -6,8 +5,6 @@ import Navbar from "@/components/Navbar";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Providers from "@/libs/provider";
-import { cookies } from "next/headers";
-import { jwtDecoder } from "@/jwtDecoder/jwtDecoder";
 // import { cookies } from "next/headers";
 // import { jwtDecoder } from "@/jwtDecoder/jwtDecoder";
 // import AddPostModal from "@/components/modal/AddPostModal";
@@ -34,10 +31,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  const cookieStore = cookies();
-  const accessToken = cookieStore.get("accessToken")?.value as string;
-  const userInfo = jwtDecoder(accessToken);
-  console.log(userInfo)
+  // const cookieStore = cookies();
+  // const accessToken = cookieStore.get("accessToken")?.value as string;
+  // const userInfo = jwtDecoder(accessToken);
+
 
   return (
     <html lang="en">
@@ -51,7 +48,7 @@ export default function RootLayout({
         <Providers>
         <Navbar/>
             {children}
-           
+            {/* <AddPostModal userInfo={userInfo}/> */}
         </Providers>
       </body>
     </html>
