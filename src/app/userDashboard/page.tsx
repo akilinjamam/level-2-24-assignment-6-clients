@@ -12,6 +12,6 @@ const Page = () => {
            <UserAllPost token={accessToken}/>
         </div>
     );
-};
+}
 
 export default Page;

@@ -12,14 +12,14 @@ const Navbar = () => {
 
     const {data:getProfilePicture} = useGetProfileUser();
     const userData = getProfilePicture?.data;
-
+    console.log(userData)
     const [inputValue, setInputValue] = useState('');
     
 
    const [hide, setHide] = useState(true);
 
     const pathName = usePathname();
-   console.log(pathName)
+  
     return (
         <div onClick={() => {
             setHide(true)
