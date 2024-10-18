@@ -34,6 +34,7 @@ const AddPost = ({userInfo} : {userInfo:CustomJwtPayload}) => {
             description: value,
             premium,
             category,
+            upvotes:0
         };
 
         formData.append("data", JSON.stringify(data));
@@ -41,6 +42,8 @@ const AddPost = ({userInfo} : {userInfo:CustomJwtPayload}) => {
         for( const image of imageFiles){
             formData.append("images", image)
         }
+
+        console.log(data)
 
         createPostData(formData)
     }
