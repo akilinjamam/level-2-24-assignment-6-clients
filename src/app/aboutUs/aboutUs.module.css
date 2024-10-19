@@ -1,0 +1,11 @@
+.items {
+    background-color: #3d3a3a;
+}
+
+
+@media screen and (max-width: 680px) {
+    .container{
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
