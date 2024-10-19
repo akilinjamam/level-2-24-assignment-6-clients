@@ -95,7 +95,7 @@ const NavItems = ({userInfo}: {userInfo:CustomJwtPayload}) => {
                             })
                         }
                         {
-                            userInfo?.role === 'user'
+                            userData?.role === 'user'
                             &&
                             <Link onClick={(e) => e.stopPropagation()} href="/userDashboard">
                             <li className={`mb-2 ${activeDash('/userDashboard')}`}>
@@ -104,7 +104,7 @@ const NavItems = ({userInfo}: {userInfo:CustomJwtPayload}) => {
                             </Link>
                         }
                         {
-                            userInfo?.role === 'admin'
+                            userData?.role === 'admin'
                             &&
                             <Link onClick={(e) => e.stopPropagation()} href="/adminDashboard">
                             <li className={`mb-2 ${activeDash('/adminDashboard')}`}>
@@ -144,7 +144,7 @@ const NavItems = ({userInfo}: {userInfo:CustomJwtPayload}) => {
                             })
                         }
                         {
-                            userInfo?.role === 'user'
+                            userData?.role === 'user'
                             &&
                             <Link onClick={(e) => e.stopPropagation()} href="/userDashboard">
                             <li className={`mb-2 ${activeDash('/userDashboard')}`}>
@@ -153,7 +153,7 @@ const NavItems = ({userInfo}: {userInfo:CustomJwtPayload}) => {
                             </Link>
                         }
                         {
-                            userInfo?.role === 'admin'
+                            userData?.role === 'admin'
                             &&
                             <Link onClick={(e) => e.stopPropagation()} href="/adminDashboard">
                             <li className={`mb-2 ${activeDash('/adminDashboard')}`}>
