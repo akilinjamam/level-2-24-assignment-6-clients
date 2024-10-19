@@ -83,3 +83,38 @@ export const getOtherProfileUser = async (id: FieldValues) => {
     }
   }
 };
+
+export const getAllUser = async () => {
+  try {
+    const { data } = await axiosInstance.get(`/api/auth/get-all-user`);
+    return data;
+  } catch (error: any) {
+    if (error.response) {
+      const errorMessage = error.response.data?.message || " failed.";
+      throw new Error(errorMessage);
+    } else {
+      throw new Error(
+        error.message || "An unknown error occurred during getting user."
+      );
+    }
+  }
+};
+
+export const updateUser = async (id: string, userData: FieldValues) => {
+  try {
+    const { data } = await axiosInstance.patch(
+      `/api/auth/update-user/${id}`,
+      userData
+    );
+    return data;
+  } catch (error: any) {
+    if (error.response) {
+      const errorMessage = error.response.data?.message || " failed.";
+      throw new Error(errorMessage);
+    } else {
+      throw new Error(
+        error.message || "An unknown error occurred during updating user."
+      );
+    }
+  }
+};

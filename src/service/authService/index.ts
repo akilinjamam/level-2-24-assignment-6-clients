@@ -117,3 +117,7 @@ export const getCurrentUser = () => {
 
   return decodedToken;
 };
+
+export const logout = () => {
+  cookies().delete("accessToken");
+};

@@ -21,4 +21,5 @@ export type TPosts = {
   images: string[];
   category: string;
   premium: boolean;
+  upvotes?: number;
 };

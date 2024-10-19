@@ -20,7 +20,7 @@ const NewsFeeds = ({data, accessToken}: {data:any, accessToken:string}) => {
                             <NewsFeedsProfile item={item} token={accessToken} />
                             <Follow myId={accessToken} followingId={item?.userId?._id}/>
                         </div>
-
+                        {item?.premium === true && <p className="text-orange-500 ml-2 py-3 font-bold text-2xl">Premium</p> }
                         {/* Image section */}
                         <div className="w-full h-auto">
                             <LightGalleryImage item={item} />

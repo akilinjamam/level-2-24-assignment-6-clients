@@ -1,6 +1,7 @@
 export const userRoutes = [
   {
-    link: "",
-    name: "Posts",
+    link: "/userDashboard",
+    name: "My Posts",
+    icon: "uil uil-document-layout-right",
   },
 ];

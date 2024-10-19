@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { useState } from "react";
 import { useGetProfileUser } from "@/hooks/profile.hook";
@@ -9,8 +9,10 @@ import Image from "next/image";
 import fallbackImg from '../../../images/default-fallback-image.png';
 import { homeRoutes, THomeRoutes } from "../homeRoutes";
 import { CustomJwtPayload } from "@/jwtDecoder/jwtDecoder";
+import { logout } from "@/service/authService";
 
 const NavItems = ({userInfo}: {userInfo:CustomJwtPayload}) => {
+    const router = useRouter();
     console.log(userInfo)
     const {data:getProfilePicture} = useGetProfileUser();
     const userData = getProfilePicture?.data;
@@ -65,9 +67,14 @@ const NavItems = ({userInfo}: {userInfo:CustomJwtPayload}) => {
                 <div onClick={(e) => {
                     setHide(!hide)
                     e.stopPropagation()
-                }} className="w-[40px] h-[40px] bg-gray-200 rounded-full cursor-pointer overflow-hidden">
+                }} className="w-[40px] h-[40px] bg-gray-200 rounded-full cursor-pointer overflow-hidden ">
                     <Image className="object-cover scale-150 mt-1" style={{width:'50px', height:'40px'}} width={500} height={500} priority src={userData?.coverImg === 'add profile img' ? fallbackImg : userData?.coverImg || fallbackImg}  alt='cover-image'/>
+                    
                 </div>
+                <div>
+                    <p className="absolute top-[15px] right-[55px] text-sm text-blue-500 font-bold">{userData?.verified && 'verified' }</p>
+                </div>
+                
                 <div className={`w-[200px] h-auto bg-gray-100 top-[60px] right-0 ${hide ? 'hidden' : 'absolute'} p-2 text-sm`}>
                     <ul >
                         <p className="font-bold">{userData?.name}</p>
@@ -87,16 +94,33 @@ const NavItems = ({userInfo}: {userInfo:CustomJwtPayload}) => {
                                 )
                             })
                         }
-                        <Link onClick={(e) => e.stopPropagation()} href="/userDashboard">
+                        {
+                            userInfo?.role === 'user'
+                            &&
+                            <Link onClick={(e) => e.stopPropagation()} href="/userDashboard">
                             <li className={`mb-2 ${activeDash('/userDashboard')}`}>
                                 <i className='uil uil-create-dashboard'></i> User Dashboard
                             </li>
-                        </Link>
-                        <Link onClick={(e) => e.stopPropagation()} href="/adminDashboard">
+                            </Link>
+                        }
+                        {
+                            userInfo?.role === 'admin'
+                            &&
+                            <Link onClick={(e) => e.stopPropagation()} href="/adminDashboard">
                             <li className={`mb-2 ${activeDash('/adminDashboard')}`}>
                                 <i className='uil uil-dashboard'></i> Admin Dashboard
                             </li>
-                        </Link>
+                            </Link>
+                        }
+                        <p onClick={(e) => {
+                            e.stopPropagation()
+                            logout()
+                            router.push('/login')
+                        }} >
+                            <li className={`mb-2 cursor-pointer ${activeDash('/adminDashboard')}`}>
+                                <i className='uil uil-signout cursor-pointer'></i> Logout
+                            </li>
+                        </p>
                     </ul>
    
                 </div>
@@ -119,6 +143,33 @@ const NavItems = ({userInfo}: {userInfo:CustomJwtPayload}) => {
                                 )
                             })
                         }
+                        {
+                            userInfo?.role === 'user'
+                            &&
+                            <Link onClick={(e) => e.stopPropagation()} href="/userDashboard">
+                            <li className={`mb-2 ${activeDash('/userDashboard')}`}>
+                                <i className='uil uil-create-dashboard'></i> User Dashboard
+                            </li>
+                            </Link>
+                        }
+                        {
+                            userInfo?.role === 'admin'
+                            &&
+                            <Link onClick={(e) => e.stopPropagation()} href="/adminDashboard">
+                            <li className={`mb-2 ${activeDash('/adminDashboard')}`}>
+                                <i className='uil uil-dashboard'></i> Admin Dashboard
+                            </li>
+                            </Link>
+                        }
+                        <p onClick={(e) => {
+                            e.stopPropagation()
+                            logout()
+                            router.push('/login')
+                        }} >
+                            <li className={`mb-2 cursor-pointer ${activeDash('/adminDashboard')}`}>
+                                <i className='uil uil-signout cursor-pointer'></i> Logout
+                            </li>
+                        </p>
                     </ul>
                     
                 </div>

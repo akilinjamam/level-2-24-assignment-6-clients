@@ -7,7 +7,6 @@ const DeletePost = ({postId}: {postId:string}) => {
     const {data, refetch} = useGetAllPost()
     const {mutate:deletePostData} = useDeletePosts(refetch)
 
-
     console.log(data)
 
     const handleDeletePost = () => {
@@ -16,7 +15,7 @@ const DeletePost = ({postId}: {postId:string}) => {
 
 
     return (
-        <p onClick={ handleDeletePost} className="px-2 py-1 mx-3 rounded bg-blue-500 text-white font-bold cursor-pointer">Delete</p>
+        <p onClick={ handleDeletePost} className="w-[65px]  px-2 py-1 mx-3 rounded bg-blue-500 text-white font-bold cursor-pointer">Delete</p>
     );
 };
 

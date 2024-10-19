@@ -10,6 +10,10 @@ import { CustomJwtPayload } from '@/jwtDecoder/jwtDecoder';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import AddPostModal from './modal/AddPostModal';
+import { useGetAllPost } from '@/hooks/posts.hook';
+import { TPosts } from '@/types/posts.type';
+import { toast } from 'react-toastify';
+import PaymentModal from './modal/PaymentModal';
 
 type followingIds = {
     _id:string;
@@ -35,10 +39,12 @@ export type TFollow = {
 
 const ProfileImg = ({userInfo} : {userInfo: CustomJwtPayload}) => {
     const [open, setOpen] = useState(false)
+    const [openPayment, setOpenPayment] = useState(false)
     const router = useRouter();
     const {data} = useGetFollow()
     // const [favorite, setFavourite] = useState(false);
     const {data:getProfileData, refetch} = useGetProfileUser()
+    const {data:getPostData} = useGetAllPost()
     const {mutate:updateCoverPhoto} = useUpdateCover(refetch);
     const {mutate:updateProfilePhoto} = useUpdateProfile(refetch);
     // const {setOpen} = useAppContext()
@@ -49,6 +55,10 @@ const ProfileImg = ({userInfo} : {userInfo: CustomJwtPayload}) => {
 
     const findFollowerData = data?.data?.filter((f:TFollow) => f?.id?._id === userInfo?.id) as TFollow[]
     console.log(findFollowingData)
+
+    const filterPostsByUser = getPostData?.data?.filter((f:TPosts) => f?.userId?._id === userInfo?.id)
+
+    const checkUpvotes = filterPostsByUser?.find((f:TPosts) => f?.upvotes as number > 0)
 
     
     const handleCoverImageChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -79,6 +89,14 @@ const ProfileImg = ({userInfo} : {userInfo: CustomJwtPayload}) => {
         }
     }
 
+    const handleverify = () => {
+        if(checkUpvotes?.upvotes){
+            setOpenPayment(true)
+        }else{
+            toast.error('you must have atleast 1 upvotes to verify')
+        }
+    }
+
 
     return (
         <div>
@@ -103,10 +121,15 @@ const ProfileImg = ({userInfo} : {userInfo: CustomJwtPayload}) => {
                     <div className='w-[95%] h-auto mt-[100px] mx-auto  py-3'>
                         <div className='w-full h-[50px] py-2 flex items-center justify-between'>
                             <p className='text-2xl font-bold border-b-2 '>{userData?.name}
+                                {userData?.verified &&  <i className="uil uil-check-circle text-blue-500 font-bold ml-2"></i>}
                             </p>
-                            <div>
-                                <p className='px-2 py-1 bg-blue-500 rounded text-white font-bold'>verify profile</p>
-                            </div>
+                            {
+                                !userData?.verified
+                                &&
+                                <div>
+                                    <p onClick={handleverify} className='px-2 py-1 bg-blue-500 rounded text-white font-bold cursor-pointer'>verify profile</p>
+                                </div>
+                            }
                         </div>
                         <hr />
                         <br />
@@ -161,6 +184,7 @@ const ProfileImg = ({userInfo} : {userInfo: CustomJwtPayload}) => {
                 </section>
             </div>
             <AddPostModal userInfo={userInfo} open={open} setOpen={setOpen}/>
+            <PaymentModal userInfo={userInfo} open={openPayment} setOpen={setOpenPayment}/>
         </div>
     );
 };
