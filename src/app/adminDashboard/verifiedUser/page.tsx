@@ -1,11 +1,11 @@
 "use client"
 
-import { useGetAllUser, useUpdateUser } from "@/hooks/profile.hook";
+import { useGetAllUser} from "@/hooks/profile.hook";
 import { TUser } from "@/types/posts.type";
 
 const ManageUser = () => {
 
-    const {data:getAllUsers, refetch} = useGetAllUser();
+    const {data:getAllUsers} = useGetAllUser();
     
     return (
         <div className="w-full h-[500px] overflow-x-hidden overflow-y-scroll">

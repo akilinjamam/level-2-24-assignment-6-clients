@@ -41,18 +41,6 @@ const Graph = () => {
         ],
       };
    
-      const options = {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: 'top',
-          },
-          title: {
-            display: true,
-            text: 'Monthly Sales Data',
-          },
-        },
-      };
 
     return (
         <div className="w-full p-2">
