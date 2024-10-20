@@ -96,7 +96,7 @@ const NavItems = ({userInfo}: {userInfo:CustomJwtPayload}) => {
                             })
                         }
                         {
-                            userData?.role === 'user'
+                            userInfo?.role === 'user'
                             &&
                             <Link onClick={(e) => e.stopPropagation()} href="/userDashboard">
                             <li className={`mb-2 ${activeDash('/userDashboard')}`}>
@@ -105,7 +105,7 @@ const NavItems = ({userInfo}: {userInfo:CustomJwtPayload}) => {
                             </Link>
                         }
                         {
-                            userData?.role === 'admin'
+                            userInfo?.role === 'admin'
                             &&
                             <Link onClick={(e) => e.stopPropagation()} href="/adminDashboard">
                             <li className={`mb-2 ${activeDash('/adminDashboard')}`}>
