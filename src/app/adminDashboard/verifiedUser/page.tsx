@@ -15,6 +15,7 @@ const ManageUser = () => {
                 <tr>
                     <th className="px-6 py-3 text-left border border-gray-300">Email</th>
                     <th className="px-6 py-3 text-left border border-gray-300">Role</th>
+                    <th className="px-6 py-3 text-left border border-gray-300">Date</th>
                     <th className="px-6 py-3 text-left border border-gray-300">Verification</th>
 
                 </tr>
@@ -27,6 +28,7 @@ const ManageUser = () => {
                                 <tr key={index+1}>
                                     <td className="px-6 py-4 border border-gray-300">{user?.email}</td>
                                     <td className="px-6 py-4 border border-gray-300">{user?.role}</td>
+                                    <td className="px-6 py-4 border border-gray-300">{user?.createdAt?.slice(0,10)}</td>
 
                                     <td className="px-6 py-4 border border-gray-300">{user?.verified === 'true' ? <p className="font-bold text-green-500">Verified</p> : <p className="font-bold text-red-500">Not Verified</p> }</td>
                                     

@@ -112,6 +112,7 @@ export const getCurrentUser = () => {
 
     return {
       email: decodedToken.email,
+      role: decodedToken?.role,
     };
   }
 

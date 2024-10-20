@@ -10,8 +10,13 @@ import UpAndDownVote from "../upAndDownVote/UpAndDownVote";
 
 import Comments from "../comments/Comments";
 import Other from "../other/Other";
+import { jwtDecoder } from "@/jwtDecoder/jwtDecoder";
 
 const MyNewsFeeds = ({data, accessToken}: {data:any, accessToken:string}) => {
+
+    const getToken = jwtDecoder(accessToken);
+    const id = getToken?.id;
+
     return (
         <div className="lg:w-[50%] md:w-[70%] sm:w-[98%] xsm:w-[99%] mx-auto h-auto my-2">
             <div className="w-[100%] h-auto bg-gray-100 mx-auto p-2">
@@ -51,7 +56,11 @@ const MyNewsFeeds = ({data, accessToken}: {data:any, accessToken:string}) => {
                         <UpAndDownVote accessToken={accessToken} postId={item?._id}/>
                         
                         <Comments commenterId={accessToken} postId={item?._id}/>
-                        <Other postId={item?._id}/>
+                        {
+                            id === item?.userId?._id
+                            &&
+                            <Other postId={item?._id}/>
+                        }
                     </div>
                 ))}
             </div>
