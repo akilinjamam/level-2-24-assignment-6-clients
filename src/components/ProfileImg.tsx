@@ -121,10 +121,10 @@ const ProfileImg = ({userInfo} : {userInfo: CustomJwtPayload}) => {
                     <div className='w-[95%] h-auto mt-[100px] mx-auto  py-3'>
                         <div className='w-full h-[50px] py-2 flex items-center justify-between'>
                             <p className='text-2xl font-bold border-b-2 '>{userData?.name}
-                                {userData?.verified &&  <i className="uil uil-check-circle text-blue-500 font-bold ml-2"></i>}
+                                {userData?.verified === 'true' &&  <i className="uil uil-check-circle text-blue-500 font-bold ml-2"></i>}
                             </p>
                             {
-                                !userData?.verified
+                                userData?.verified === 'false'
                                 &&
                                 <div>
                                     <p onClick={handleverify} className='px-2 py-1 bg-blue-500 rounded text-white font-bold cursor-pointer'>verify profile</p>

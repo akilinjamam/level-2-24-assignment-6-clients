@@ -73,7 +73,7 @@ const NavItems = ({userInfo}: {userInfo:CustomJwtPayload}) => {
                     
                 </div>
                 <div>
-                    <p className="absolute top-[15px] right-[55px] text-sm text-blue-500 font-bold">{userData?.verified && 'verified' }</p>
+                    <p className="absolute top-[15px] right-[55px] text-sm text-blue-500 font-bold">{userData?.verified === 'true' && 'verified' }</p>
                 </div>
                 
                 <div className={`w-[200px] h-auto bg-gray-100 top-[60px] right-0 ${hide ? 'hidden' : 'absolute'} p-2 text-sm`}>
