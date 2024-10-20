@@ -33,6 +33,7 @@ const NavItems = ({userInfo}: {userInfo:CustomJwtPayload}) => {
             setHide(true)
         }} className="w-full h-[50px] bg-gray-100 flex items-center justify-between ">
             <div className="lg:w-[24.5%] md:w-[40%] sm:w-[50%] xsm:w-[70%]  h-full p-2 flex items-center justify-start relative">
+              
                 <input value={inputValue} className="w-3/5 rounded-full px-8 text-sm h-[80%]" type="text" name="" id="" onChange={(e) => setInputValue(e.target.value)}/>
 
                 <i className="uil uil-search absolute top-[13px] left-5"></i>
@@ -68,7 +69,7 @@ const NavItems = ({userInfo}: {userInfo:CustomJwtPayload}) => {
                     setHide(!hide)
                     e.stopPropagation()
                 }} className="w-[40px] h-[40px] bg-gray-200 rounded-full cursor-pointer overflow-hidden ">
-                    <Image className="object-cover scale-150 mt-1" style={{width:'50px', height:'40px'}} width={500} height={500} priority src={userData?.coverImg === 'add profile img' ? fallbackImg : userData?.coverImg || fallbackImg}  alt='cover-image'/>
+                    <Image className="object-cover scale-150 mt-1" style={{width:'50px', height:'40px'}} width={500} height={500} priority src={userInfo?.profileImg === 'add profile img' ? fallbackImg : userInfo?.profileImg || fallbackImg}  alt='cover-image'/>
                     
                 </div>
                 <div>
@@ -77,7 +78,7 @@ const NavItems = ({userInfo}: {userInfo:CustomJwtPayload}) => {
                 
                 <div className={`w-[200px] h-auto bg-gray-100 top-[60px] right-0 ${hide ? 'hidden' : 'absolute'} p-2 text-sm`}>
                     <ul >
-                        <p className="font-bold">{userData?.name}</p>
+                        <p className="font-bold">{userInfo?.name}</p>
                         <hr />
                         <br />
                         {

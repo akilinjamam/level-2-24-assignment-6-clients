@@ -10,7 +10,7 @@ const Gallery = () => {
 
 
     return (
-        <div className="w-[50%] mx-auto bg-gray-200">
+        <div className="lg:w-[50%] md:w-[70%] sm:w-[98%] xsm:w-[99%] mx-auto bg-gray-200">
             {
                 allImgData?.data?.map((item:TPosts, index:number) => {
                     return (

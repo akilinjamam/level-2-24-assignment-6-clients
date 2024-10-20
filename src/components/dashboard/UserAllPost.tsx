@@ -10,10 +10,12 @@ import UpAndDownVote from "../upAndDownVote/UpAndDownVote";
 import Comments from "../comments/Comments";
 import { useState } from "react";
 import AddPostModalForDashbord from "../modal/AddPostModalForDashbord";
+import Link from "next/link";
 
 const UserAllPost = ({token}: {token:string}) => {
     const [open, setOpen] = useState(false);
     const getToken = jwtDecoder(token);
+    const [hide, setHide] = useState(true);
 
     const {data} = useGetFollow()
     const {data:profileUser} = useGetProfileUser()
@@ -34,9 +36,18 @@ const UserAllPost = ({token}: {token:string}) => {
                 <span className="font-bold"><span>Following: {findFollowingData?.length}</span> <span>Follower: {findFollowerData?.length}</span></span>
             </div>
             <br />
-            <div className="w-full h-[20px] flex items-center justify-end">
+            <div className="w-full h-[20px] flex items-center justify-between">
                 <div>
                     <p onClick={() => setOpen(true)} className='w-[130px] px-2 py-1 rounded bg-blue-500 font-bold text-white cursor-pointer'><i className="uil uil-plus"></i> Create Post</p>
+                </div>
+                <div className="relative">
+                    <i onClick={() => setHide(!hide)} className="uil uil-bars cursor-pointer lg:hidden md:hidden sm:block xsm:block"></i>
+                    <div className={`w-[300px] bg-gray-300 ${hide ? 'hidden' : 'absolute'} top-10 right-0 p-3`}>
+                        <Link href="/userDashboard" className='font-bold cursor-pointer'><i className="uil uil-document-layout-right"></i> My Posts</Link>
+                        <br />
+                        <br />
+                       
+                    </div>
                 </div>
             </div>
             <br />

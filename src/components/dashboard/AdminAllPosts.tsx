@@ -9,11 +9,12 @@ import Comments from "../comments/Comments";
 import { useState } from "react";
 import AddPostModalForDashbord from "../modal/AddPostModalForDashbord";
 import DeletePost from "../deletePost/DeletePost";
+import Link from "next/link";
 
 const AdminAllPost = ({token}: {token:string}) => {
     const [open, setOpen] = useState(false);
     const getToken = jwtDecoder(token);
-
+    const [hide, setHide] = useState(true);
    
     const {data:profileUser} = useGetProfileUser()
     const {data:allPosts} = useGetAllPost();
@@ -23,7 +24,21 @@ const AdminAllPost = ({token}: {token:string}) => {
         <div>
             <div style={{borderBottom: '1px solid black'}} className="w-full h-[50px] flex items-center justify-between">
                 <p className="font-bold ">All Posts: {profileUser?.data?.name}</p>
-        
+                <div className="relative">
+                    <i onClick={() => setHide(!hide)} className="uil uil-bars cursor-pointer lg:hidden md:hidden sm:block xsm:block"></i>
+                    <div className={`w-[300px] bg-gray-300 ${hide ? 'hidden' : 'absolute'} top-10 right-0 p-3`}>
+                        <Link href="/adminDashboard" className='font-bold cursor-pointer'><i className="uil uil-document-layout-right"></i> Manage Posts</Link>
+                        <br />
+                        <br />
+                        <Link href="/adminDashboard/manageUser" className='font-bold cursor-pointer'><i className="uil uil-users-alt"></i> Manage User</Link>
+                        <br />
+                        <br />
+                        <Link href="/adminDashboard/verifiedUser" className='font-bold cursor-pointer'><i className="uil uil-users-alt"></i>Verified User</Link>
+                        <br />
+                        <br />
+                        <Link href="/adminDashboard/graph" className='font-bold cursor-pointer'><i className="uil uil-graph-bar"></i> Graph</Link>
+                    </div>
+                </div>
             </div>
             <br />
             <div className="w-full h-[20px] flex items-center justify-end">

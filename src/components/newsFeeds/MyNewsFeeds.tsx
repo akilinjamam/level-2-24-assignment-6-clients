@@ -13,7 +13,7 @@ import Other from "../other/Other";
 
 const MyNewsFeeds = ({data, accessToken}: {data:any, accessToken:string}) => {
     return (
-        <div className="w-[50%] mx-auto h-auto my-2">
+        <div className="lg:w-[50%] md:w-[70%] sm:w-[98%] xsm:w-[99%] mx-auto h-auto my-2">
             <div className="w-[100%] h-auto bg-gray-100 mx-auto p-2">
                 {data?.map((item: TPosts, index: number) => (
                     <div className="bg-gray-200 mb-3" key={index + 1}>

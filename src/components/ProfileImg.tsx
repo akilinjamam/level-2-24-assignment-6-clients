@@ -100,7 +100,7 @@ const ProfileImg = ({userInfo} : {userInfo: CustomJwtPayload}) => {
 
     return (
         <div>
-            <div className="w-[50%] bg-gray-200 mx-auto auto my-2 h-auto">
+            <div className="lg:w-[50%] md:w-[70%] sm:w-[98%] xsm:w-[99%] bg-gray-200 mx-auto auto my-2 h-auto">
                 <section className="w-full h-[400px] bg-gray-200 relative overflow: 'hidden'">
                     <div className='w-full h-[400px] overflow-hidden '>
                         <Image style={{width:'100%', height:'auto'}} width={1000} height={700} priority src={userData?.coverImg === 'add cover img' ? fallbackImg : userData?.coverImg || fallbackImg}  alt='cover-image'/>

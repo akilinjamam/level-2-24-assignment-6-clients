@@ -2,6 +2,7 @@
 import { cookies } from "next/headers";
 
 import NewsFeeds from "@/components/newsFeeds/NewsFeeds";
+import Quotation from "@/components/quotation/Quotation";
 
 const Home = async ({searchParams}: { searchParams: { [key: string]: string | string[] | undefined } }) => {
 
@@ -39,7 +40,10 @@ const Home = async ({searchParams}: { searchParams: { [key: string]: string | st
     const data = await getPosts();
 
     return (
-       <NewsFeeds data={data} accessToken={accessToken}/>
+        <div>
+            <Quotation/>
+            <NewsFeeds data={data} accessToken={accessToken}/>
+        </div>
     );
 };
 

@@ -10,7 +10,7 @@ const Contact = () => {
 
     const {View} = useLottie(options)
     return (
-        <div className={`w-[50%] mx-auto h-auto bg-gray-50 rounded-lg my-6 lg:flex lg:items-center lg:justify-between p-3`}>
+        <div className={`lg:w-[50%] md:w-[70%] sm:w-[98%] xsm:w-[99%] mx-auto h-auto bg-gray-50 rounded-lg my-6 lg:flex lg:items-center lg:justify-between p-3`}>
         <section className="lg:w-[46%] sm:w-full xsm:w-full h-full bg-blue-50 flex items-center justify-center">
             {/* <img style={{borderRadius:'10px'}} width={450} src={contactus} alt="" /> */}
             {View}

@@ -7,7 +7,7 @@ export type TUser = {
   role?: "user" | "admin";
   profileImg?: string;
   coverImg?: string;
-  verified?: boolean;
+  verified?: string;
   createdAt: any;
   updatedAt: any;
 };

@@ -9,7 +9,7 @@ const userLayout = ({children}: {children: ReactNode}) => {
     
     return (
         <div className='w-full h-[86vh] flex items-center justify-between my-2'>
-            <div className='w-[19.5%] h-full bg-gray-200 p-2'>
+            <div className='lg:w-[19.5%] lg:block sm:hidden xsm:hidden h-full bg-gray-200 p-2'>
                 {
                     userRoutes?.map((item: {link: string, name:string, icon:string}, index:number) => {
                         return (
@@ -23,7 +23,7 @@ const userLayout = ({children}: {children: ReactNode}) => {
                     })
                 }
             </div>
-            <div className='w-[80%] h-full bg-gray-200 p-2'>
+            <div className='lg:w-[80%] sm:w-[100%] xsm:w-[100%] h-full bg-gray-200 p-2'>
             {children}
             </div>
         </div>

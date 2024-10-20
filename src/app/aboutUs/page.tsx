@@ -18,7 +18,7 @@ const Abouts = () => {
 
 
     return (
-        <div className='w-[50%] mx-auto h-auto'>
+        <div className='lg:w-[50%] md:w-[70%] sm:w-[98%] xsm:w-[99%] mx-auto h-auto'>
             <div className="w-full lg:h-auto sm:h-auto xsm:h-auto bg-gray-50 rounded-lg my-6 lg:flex lg:items-center lg:justify-between p-3">
             <section className="lg:w-[43%] sm:w-full xsm:w-full  h-full bg-blue-50 flex items-center justify-center sm:py-3 xsm:py-3 lg:py-0">
                 {/* <img style={{borderRadius:'10px'}} width={350} src={aboutus} alt="" /> */}

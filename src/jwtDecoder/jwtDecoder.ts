@@ -6,6 +6,7 @@ export interface CustomJwtPayload extends JwtPayload {
   name?: string;
   exp?: number;
   role?: string;
+  profileImg?: string;
 }
 export const jwtDecoder = (token: string) => {
   const decode = jwtDecode<CustomJwtPayload>(token);
