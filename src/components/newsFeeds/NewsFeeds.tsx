@@ -9,6 +9,8 @@ import UpAndDownVote from "../upAndDownVote/UpAndDownVote";
 import Comments from "../comments/Comments";
 import Favourite from "../favourite/Favourite";
 import NewsFeedsProfile from "../newFeedsProfile/NewsFeedsProfile";
+import Link from "next/link";
+import SocialShare from "../socialShare/SocialShare";
 
 const NewsFeeds = ({data, accessToken}: {data:any, accessToken:string}) => {
     return (
@@ -43,6 +45,15 @@ const NewsFeeds = ({data, accessToken}: {data:any, accessToken:string}) => {
                         <div className="w-full ml-1">
                             <div dangerouslySetInnerHTML={{ __html:item?.description  }} />
                             
+                        </div>
+                        <br />
+                        <div className="w-full h-[30px] flex items-center justify-between px-2">
+                            <div className="bg-blue-500 text-white font-bold px-2 py-1 my-2">
+                                <Link href={`/pdf/${item?._id}`}><p>Generate PDF</p></Link>
+                            </div>
+                            <div>
+                                <SocialShare postId={item?._id}/>
+                            </div>
                         </div>
                         <br />
                         <UpAndDownVote postId={item?._id} accessToken={accessToken}/>
