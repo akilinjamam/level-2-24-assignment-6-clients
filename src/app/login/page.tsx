@@ -25,6 +25,7 @@ type Inputs = {
 
 const Login = () => {
     const navigate = useRouter();
+    const [selectBtn, setSelectBtn] = useState('');
     const [email, setEmail] = useState('');
     const {
         register,
@@ -39,7 +40,7 @@ const Login = () => {
 
       const onSubmit: SubmitHandler<Inputs> = async (data) => {
         try {
-
+            setSelectBtn('3')
             if(!data.email && !data.password){
                 return toast.error('email and password not added')
             }
@@ -99,6 +100,25 @@ const Login = () => {
                     </div>
                     <p  className="text-gray-700 text-3xl font-bold my-6">Login Form:</p>
                     <hr />
+                    <div>
+                        <br />
+                        <button  className='w-[auto] h-[35px] rounded-md bg-blue-500 text-white font-bold cursor-pointer px-[10px] mr-[10px]' onClick={(e) => {
+                            e.preventDefault()
+                            setSelectBtn('1')
+                            loginData({
+                                email: 'selim@gmail.com',
+                                password: '1234567'
+                            })
+                        } }> {(isPending && selectBtn === '1') ? 'Loading..' : 'Admin Login'}</button>
+                        <button  className='w-[100px] h-[35px] rounded-md bg-blue-500 text-white font-bold cursor-pointer' onClick={(e) => {
+                            e.preventDefault()
+                            setSelectBtn('2')
+                            loginData({
+                                email: 'kaisar@gmail.com',
+                                password: '1234567'
+                            })
+                        } }>{(isPending && selectBtn === '2')  ? 'Loading..' : 'User Login'}</button>
+                    </div>
                     <br />
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <input style={{background:'none',borderBottom:'1px solid lightgray'}} className='mb-3 w-[80%] ' type="email" {...register("email")} placeholder='type your email' onChange={(e) => setEmail(e.target.value)}/>
@@ -108,7 +128,7 @@ const Login = () => {
                         <br />
                         
                         <br />
-                        <input className='w-[100px] h-[35px] rounded-md bg-blue-500 text-white font-bold cursor-pointer' type="submit" value={`${isPending ? 'loading...' : 'submit'}`} />
+                        <input className='w-[100px] h-[35px] rounded-md bg-blue-500 text-white font-bold cursor-pointer' type="submit" value={`${(isPending && selectBtn === '3') ? 'loading...' : 'submit'}`} />
                     </form>
                         <div className="w-[90%] flex items-center justify-between text-sm text-blue-400 absolute bottom-2">
                            <Link href='/changePassword'><button>Change Password</button></Link>
