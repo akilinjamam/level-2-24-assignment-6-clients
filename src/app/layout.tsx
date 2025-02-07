@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Providers from "@/libs/provider";
-import IntroName from "@/components/introName/IntroName";
+// import IntroName from "@/components/introName/IntroName";
 // import { cookies } from "next/headers";
 // import { jwtDecoder } from "@/jwtDecoder/jwtDecoder";
 // import AddPostModal from "@/components/modal/AddPostModal";
