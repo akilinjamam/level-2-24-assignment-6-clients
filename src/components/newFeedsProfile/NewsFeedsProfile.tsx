@@ -11,8 +11,7 @@ const NewsFeedsProfile = ({item, token}: {item:TPosts, token:string}) => {
     const router = useRouter();
 
     const id = jwtDecoder(token);
-    console.log(id)
-
+  
     const handleNavigate = () => {
         console.log('hello')
         if(item?.userId?._id === id.id){

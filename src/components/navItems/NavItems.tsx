@@ -13,10 +13,10 @@ import { logout } from "@/service/authService";
 
 const NavItems = ({userInfo}: {userInfo:CustomJwtPayload}) => {
     const router = useRouter();
-    console.log(userInfo)
+   
     const {data:getProfilePicture} = useGetProfileUser();
     const userData = getProfilePicture?.data;
-    console.log(userData)
+    
     const [inputValue, setInputValue] = useState('');
     
 
@@ -32,11 +32,11 @@ const NavItems = ({userInfo}: {userInfo:CustomJwtPayload}) => {
         <div onClick={() => {
             setHide(true)
         }} className="w-full h-[50px] bg-gray-100 flex items-center justify-between ">
-            <div className="lg:w-[24.5%] md:w-[40%] sm:w-[50%] xsm:w-[70%]  h-full p-2 flex items-center justify-start relative">
-              
+            <div className="lg:w-[24.5%] md:w-[40%] sm:w-[50%] xsm:w-[70%]  h-full p-2 flex items-center justify-end relative ">
+                <div className="w-[30px] h-[30px] rounded-full bg-blue-500 text-white font-bold flex items-center justify-center mr-5">G</div>
                 <input value={inputValue} className="w-3/5 rounded-full px-8 text-sm h-[80%]" type="text" name="" id="" onChange={(e) => setInputValue(e.target.value)}/>
 
-                <i className="uil uil-search absolute top-[13px] left-5"></i>
+                <i className="uil uil-search absolute top-[13px] left-16"></i>
                 <Link href={`/?searchTerm=${inputValue}`}>
                     <button className="px-2 py-1 bg-blue-500 rounded text-white font-bold ml-2">
                         search

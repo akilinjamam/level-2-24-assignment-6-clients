@@ -13,7 +13,7 @@ import lgZoom from 'lightgallery/plugins/zoom';
 const LightGalleryImage = ({item} : {item:TPosts}) => {
     return (
         <div>
-            <LightGallery elementClassNames='w-[100%] h-auto flex flex-wrap' speed={500} plugins={[lgThumbnail,lgZoom]}>
+            <LightGallery elementClassNames='lg:w-[620px] md:w-full sm: w-full h-auto flex items-center justify-around flex-wrap mx-auto' speed={500} plugins={[lgThumbnail,lgZoom]}>
                 {
                     item?.images?.slice(0,4).map((image, index) => {
                         
@@ -23,7 +23,7 @@ const LightGalleryImage = ({item} : {item:TPosts}) => {
                                     {
                                         item?.images?.length > 1 
                                         ?
-                                        <Image className='w-[315px] h-[250px]' width={455} height={455} src={image || fallbackImg} alt={`image-${index+1}`}/>
+                                        <Image className='h-[200px]' width={300} height={300} src={image || fallbackImg} alt={`image-${index+1}`}/>
                                         :
                                         <Image  width={1000} height={1000} src={image || fallbackImg} alt={`image-${index+1}`}/>
                                     }
@@ -31,7 +31,7 @@ const LightGalleryImage = ({item} : {item:TPosts}) => {
                         )
                     })
                 }                             
-        </LightGallery>
+            </LightGallery>
         </div>
     );
 };

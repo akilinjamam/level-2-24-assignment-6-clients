@@ -47,7 +47,7 @@ export default function RootLayout({
       >
         <ToastContainer position="bottom-right"/>
         <Providers>
-        <IntroName/>
+        {/* <IntroName/> */}
         <Navbar/>
             {children}
             {/* <AddPostModal userInfo={userInfo}/> */}

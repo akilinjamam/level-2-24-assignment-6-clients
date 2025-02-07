@@ -2,7 +2,7 @@
 import { cookies } from "next/headers";
 
 import NewsFeeds from "@/components/newsFeeds/NewsFeeds";
-import Quotation from "@/components/quotation/Quotation";
+// import Quotation from "@/components/quotation/Quotation";
 
 const Home = async ({searchParams}: { searchParams: { [key: string]: string | string[] | undefined } }) => {
 
@@ -41,7 +41,7 @@ const Home = async ({searchParams}: { searchParams: { [key: string]: string | st
 
     return (
         <div>
-            <Quotation/>
+            {/* <Quotation/> */}
             <NewsFeeds data={data} accessToken={accessToken}/>
         </div>
     );
