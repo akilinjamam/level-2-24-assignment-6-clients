@@ -125,7 +125,7 @@ const NavItems = ({userInfo}: {userInfo:CustomJwtPayload}) => {
                     </ul>
    
                 </div>
-                <div className={`w-[200px] h-auto bg-gray-100 top-[60px] right-0 ${hide ? 'hidden' : 'xsm:absolute sm:absolute md:hidden lg:hidden'} p-2 text-sm`}>
+                <div className={`w-[200px] h-auto bg-gray-100 top-[60px] right-0 ${hide ? 'hidden' : 'xsm:absolute sm:absolute md:hidden lg:hidden'} p-2 text-sm `}>
                     <ul >
                     <p className="font-bold">{userData?.name}</p>
                         <hr />

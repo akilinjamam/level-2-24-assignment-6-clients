@@ -8,7 +8,7 @@ const userLayout = ({children}: {children: ReactNode}) => {
 
     
     return (
-        <div className='w-full h-[86vh] flex items-center justify-between my-2'>
+        <div className='w-full max-w-[1200px] h-[86vh] mx-auto flex items-center justify-between my-2'>
             <div className='lg:w-[19.5%] lg:block sm:hidden xsm:hidden h-full bg-gray-200 p-2'>
                 {
                     userRoutes?.map((item: {link: string, name:string, icon:string}, index:number) => {

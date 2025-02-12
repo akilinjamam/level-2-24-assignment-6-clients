@@ -21,7 +21,7 @@ const AdminAllPost = ({token}: {token:string}) => {
     
    
     return (
-        <div>
+        <div className="relative">
             <div style={{borderBottom: '1px solid black'}} className="w-full h-[50px] flex items-center justify-between">
                 <p className="font-bold ">All Posts: {profileUser?.data?.name}</p>
                 <div className="relative">
@@ -54,28 +54,28 @@ const AdminAllPost = ({token}: {token:string}) => {
                             return (
                                 <div  key={index+1}  className="bg-gray-100 mb-2 p-2">
                                     <div>
-                                        <p className="font-bold">Author: {item?.userId?.name}</p>
+                                        <p className="font-bold text-sm italic text-gray-400">Author: {item?.userId?.name}</p>
                                     </div>
                                     <br />
                                     <div>
-                                        <p className="font-bold">Title: {item?.title}</p>
+                                        <p className="font-bold text-sm">Title: {item?.title}</p>
                                     </div>
                                     <br />
                                     <div>
-                                        <p className="font-bold">Category: {item?.category}</p>
+                                        <p className="font-bold text-sm">Category: {item?.category}</p>
                                     </div>
                                     <br />
                                     <div className="flex flex-wrap mb-3">
                                         {
                                             item?.images?.map((image:string, index:number) => {
                                                 return (
-                                                    <Image className="mr-2" width={500} height={500} key={index+1} src={image} alt=""/>
+                                                    <Image className="mr-2 mb-2" width={300} height={300} key={index+1} src={image} alt=""/>
                                                 )
                                             })
                                         }    
                                     </div> 
                                     <br />
-                                    <div dangerouslySetInnerHTML={{__html: item?.description}}>
+                                    <div className="text-sm" dangerouslySetInnerHTML={{__html: item?.description}}>
 
                                     </div>
                                     <br />

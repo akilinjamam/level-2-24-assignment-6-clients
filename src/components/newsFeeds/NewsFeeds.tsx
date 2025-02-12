@@ -30,7 +30,7 @@ const NewsFeeds = ({data, accessToken}: {data:any, accessToken:string}) => {
                         <br />
 
                         {/* category */}
-                        <div className="w-full ml-1  text-blue-500">
+                        <div className="w-full ml-1 text-sm text-blue-500">
                             <p className="font-bold">Category: {item?.category}</p>
                         </div>
                         <br />

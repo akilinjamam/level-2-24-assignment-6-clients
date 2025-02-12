@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react';
 
 const DashLayout = ({children}: {children: ReactNode}) => {
     return (
-        <div className='w-full h-[86vh] flex items-center justify-between my-2'>
+        <div className='w-full max-w-[1200px] mx-auto h-[86vh] flex items-center justify-between my-2'>
             <div className='lg:w-[19.5%] lg:block sm:hidden xsm:hidden h-full bg-gray-200 p-2'>
                 <Link href="/adminDashboard" className='font-bold cursor-pointer'><i className="uil uil-document-layout-right"></i> Manage Posts</Link>
                 <br />

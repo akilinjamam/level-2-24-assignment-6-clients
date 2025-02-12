@@ -23,13 +23,18 @@ export const useGetDownVote = () => {
   });
 };
 
-export const usePostUpvote = (refetchUpvote: any, refetchDownvote: any) => {
+export const usePostUpvote = (
+  refetchUpvote: any,
+  refetchDownvote: any,
+  refetchAllPost: any
+) => {
   return useMutation<any, Error, FieldValues>({
     mutationKey: ["USERCREATEUPVOTE"],
     mutationFn: async (data) => await createUpvote(data),
     onSuccess: () => {
       refetchUpvote();
       refetchDownvote();
+      refetchAllPost();
       toast.success("success");
     },
     onError: (error) => {

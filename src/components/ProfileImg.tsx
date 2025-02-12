@@ -2,7 +2,7 @@
 import '../app/globals.css';
 import { useGetProfileUser, useUpdateCover, useUpdateProfile } from '@/hooks/profile.hook';
 import Image from 'next/image';
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import fallbackImg from '../../images/default-fallback-image.png';
 // import { useAppContext } from '@/contextApi';
 import { useGetFollow } from '@/hooks/follow.hook';
@@ -59,8 +59,8 @@ const ProfileImg = ({userInfo} : {userInfo: CustomJwtPayload}) => {
     const filterPostsByUser = getPostData?.data?.filter((f:TPosts) => f?.userId?._id === userInfo?.id)
 
     const checkUpvotes = filterPostsByUser?.find((f:TPosts) => f?.upvotes as number > 0)
-
-    
+    console.log(checkUpvotes?.upvotes)
+   
     const handleCoverImageChange = (e: ChangeEvent<HTMLInputElement>) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const file = e.target.files![0] as any;
@@ -88,6 +88,8 @@ const ProfileImg = ({userInfo} : {userInfo: CustomJwtPayload}) => {
             router.push(`/profile/${otherProfileId}`)
         }
     }
+    
+    
 
     const handleverify = () => {
         if(checkUpvotes?.upvotes){
@@ -96,6 +98,10 @@ const ProfileImg = ({userInfo} : {userInfo: CustomJwtPayload}) => {
             toast.error('you must have atleast 1 upvotes to verify')
         }
     }
+
+    useEffect(() => {
+       
+    },[])
 
 
     return (

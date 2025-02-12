@@ -1,5 +1,6 @@
 "use client"
 
+import { useGetAllPost } from "@/hooks/posts.hook";
 import { useCreateDownvote, useGetDownVote, useGetUpvote, usePostUpvote } from "@/hooks/upAndDownVote.hook";
 import { jwtDecoder } from "@/jwtDecoder/jwtDecoder";
 import { TPosts, TUser } from "@/types/posts.type";
@@ -21,8 +22,9 @@ const UpAndDownVote = ({postId, accessToken}: {postId:string, accessToken:string
 
     const {data:getUpvoteData, refetch:refetchUpvote} = useGetUpvote();
     const {data:getDownvoteData, refetch:refetchDownvote} = useGetDownVote();
+    const { refetch:refetchAllPost} = useGetAllPost();
 
-    const {mutate:postUpvoteData, error} = usePostUpvote(refetchUpvote, refetchDownvote);
+    const {mutate:postUpvoteData, error} = usePostUpvote(refetchUpvote, refetchDownvote, refetchAllPost);
     const {mutate:postDownvoteData} = useCreateDownvote(refetchDownvote, refetchUpvote);
 
     const findUpvotesAccordingToPost = getUpvoteData?.data?.filter((f:TUpvote) => f?.id?._id === postId);
