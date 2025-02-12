@@ -101,14 +101,14 @@ const ProfileImg = ({userInfo} : {userInfo: CustomJwtPayload}) => {
     return (
         <div>
             <div className="lg:w-[50%] md:w-[70%] sm:w-[98%] xsm:w-[99%] bg-gray-200 mx-auto auto my-2 h-auto">
-                <section className="w-full h-[400px] bg-gray-200 relative overflow: 'hidden'">
-                    <div className='w-full h-[400px] overflow-hidden '>
+                <section className="w-full h-auto bg-gray-200 relative overflow: 'hidden'">
+                    <div className='w-full h-auto overflow-hidden '>
                         <Image style={{width:'100%', height:'auto'}} width={1000} height={700} priority src={userData?.coverImg === 'add cover img' ? fallbackImg : userData?.coverImg || fallbackImg}  alt='cover-image'/>
                     </div>
-                    <div className="w-[150px] h-[150px]  bg-gray-300 absolute left-[20px] bottom-[-70px] viewWithHover z-10 overflow-hidden flex items-center justify-center rounded-full ">
+                    <div className="w-[150px] h-[150px] absolute left-1/2 transform -translate-x-1/2 bottom-[-70px] viewWithHover z-10 overflow-hidden flex items-center justify-center rounded-full ">
                         <Image className='w-full h-full object-cover'  width={300} height={300} priority src={userData?.profileImg === ('add profile img') ? (fallbackImg) : userData?.profileImg || fallbackImg}  alt='profile-image'/>
                         <label  htmlFor="image">
-                            <i className="uil uil-pen absolute bottom-[70px] right-[30px] hide cursor-pointer bg-gray-200 px-2 rounded-full text-blue-500"></i>
+                            <i className="uil uil-pen absolute bottom-[20px] right-[30px] hide cursor-pointer bg-gray-200 px-2 rounded-full text-blue-500"></i>
                         </label>
                         <input onChange={handleProfileImageChange} className='hidden' type="file" name="" id="image" />
                     </div>
@@ -120,7 +120,7 @@ const ProfileImg = ({userInfo} : {userInfo: CustomJwtPayload}) => {
                 <section className='w-full mx-auto  h-auto'>
                     <div className='w-[95%] h-auto mx-auto  py-3'>
                         <div className='flex items-center justify-end'>
-                           <div className='w-[82%] h-[50px] py-2 flex items-center justify-between '>
+                           <div className='w-[100%] h-[60px] py-2 flex items-center justify-between border-b-2 border-gray-500 mt-10'>
                                 <p className='text-2xl font-bold border-b-2 '>{userData?.name}
                                     {userData?.verified === 'true' &&  <i className="uil uil-check-circle text-blue-500 font-bold ml-2"></i>}
                                 </p>
@@ -169,7 +169,7 @@ const ProfileImg = ({userInfo} : {userInfo: CustomJwtPayload}) => {
                         <br />
                     
                         <div className='flex items-center justify-between w-full h-[50px]'>
-                            <div className='w-[300px] h-[50px]'>
+                            <div className='w-[300px] h-auto'>
                                 <Link href={`/profile`}>
                                     <button className='text-white font-bold px-2 py-1 bg-blue-500 rounded mr-2'>Your Posts</button>
                                 </Link>

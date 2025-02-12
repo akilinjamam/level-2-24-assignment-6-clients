@@ -46,8 +46,6 @@ const ProfileForFavPosts = async() => {
 
     console.log(findMyFavouritePosts)
 
-
-
     return (
         <div>
             <ProfileImg userInfo={userInfo}/>

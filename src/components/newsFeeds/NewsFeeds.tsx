@@ -17,7 +17,7 @@ const NewsFeeds = ({data, accessToken}: {data:any, accessToken:string}) => {
         <div className="w-full min-h-auto my-2">
             <div className="lg:w-[50%] md:w-[80%] sm:w-[98%] xsm:w-[99%] min-h-auto bg-gray-100 mx-auto p-2">
                 {data?.data?.map((item: TPosts, index: number) => (
-                    <div className="bg-gray-200 mb-3" key={index + 1}>
+                    <div className="bg-gray-200 mb-3 px-2" key={index + 1}>
                         <div className="w-full h-[50px] flex items-center justify-between px-2">
                             <NewsFeedsProfile item={item} token={accessToken} />
                             <Follow myId={accessToken} followingId={item?.userId?._id}/>
@@ -42,9 +42,9 @@ const NewsFeeds = ({data, accessToken}: {data:any, accessToken:string}) => {
                         <br />
 
                         {/* Description */}
-                        <div className="w-full ml-1">
+                        <div className="w-full ml-1 text-sm pr-3">
                             <div dangerouslySetInnerHTML={{ __html:item?.description  }} />
-                            
+
                         </div>
                         <br />
                         <div className="w-full h-[30px] flex items-center justify-between px-2">

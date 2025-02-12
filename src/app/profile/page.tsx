@@ -43,20 +43,14 @@ const Profile = async () => {
 
     const data = await getPosts();
 
-
     const myPosts = data?.data;
     
-
     const findMyPosts = myPosts?.filter((f:TPosts) => f?.userId?._id === userInfo?.id)
     
-
-    console.log(findMyPosts)
-
     return (
         <div>
             <ProfileImg userInfo={userInfo}/>
             <MyNewsFeeds data={findMyPosts} accessToken={accessToken}/>
-            
         </div>
     );
 };

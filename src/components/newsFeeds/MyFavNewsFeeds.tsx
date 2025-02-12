@@ -12,7 +12,9 @@ const MyFavNewsFeeds = ({data, accessToken}: {data:any, accessToken:string}) => 
     return (
         <div className="lg:w-[50%] md:w-[70%] sm:w-[98%] xsm:w-[99%] md profileForFavPosts mx-auto h-auto my-2">
             <div className="w-[100%] h-auto bg-gray-100 mx-auto p-2">
-                {data?.map((item: TFavourite, index: number) => (
+                { data?.length > 0
+                ?
+                data?.map((item: TFavourite, index: number) => (
                     <div className="bg-gray-200 mb-3" key={index + 1}>
                         <div className="w-full h-[50px] flex items-center justify-between px-2">
                             <div className="w-auto flex items-center font-bold">
@@ -49,7 +51,12 @@ const MyFavNewsFeeds = ({data, accessToken}: {data:any, accessToken:string}) => 
                         <Favourite postId={item?.postId?._id} accessToken={accessToken}/>
                         <Comments commenterId={accessToken} postId={item?.postId?._id}/>
                     </div>
-                ))}
+                ))
+                :
+                <div className="text-sm text-center font-bold">
+                    No Favourite Post Found
+                </div>
+            }
             </div>
         </div>
     );
